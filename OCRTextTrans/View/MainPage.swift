@@ -9,25 +9,21 @@ import Foundation
 import UIKit
 import SnapKit
 
+// MARK: - Category 종류
+enum CategoryKind: Int{
+    case camera, album, record
+}
+
 // MARK: - MainPage
 final class MainPage: UIViewController {
-    
-    enum CategortKind {
-        case camera
-        case album
-        case record
-    }
-    
     private var categoryStackView: UIStackView = {
         let stackView = UIStackView()
+        // 세부적인 사항 수정 필요
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
         stackView.spacing = 16
         stackView.distribution = .fillEqually
-//        stackView.snp.makeConstraints { make in
-//            make.centerX.centerY.equalToSuperview()
-//        }
         return stackView
     }()
     
@@ -36,9 +32,7 @@ final class MainPage: UIViewController {
         self.view.backgroundColor = .yellow
         self.view.addSubview(categoryStackView) // Add StackView
         self.setNavigationBarAppear() // Custom navigation Bar
-        self.createTitle() // navigation bar title
         self.setCategory() // Category 생성
-        
     }
     // 메소드 호출 시점 확인 필요!!
     override func viewDidLayoutSubviews() {
@@ -56,45 +50,40 @@ final class MainPage: UIViewController {
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance // For iPhone small navigation bar in landscape.
+        self.navigationItem.title = "사진 번역" // 타이틀 설정
     }
-    // 네비게이션 타이틀 초기화
-    private func createTitle() {
-        var title: UILabel = {
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 18))
-            label.numberOfLines = 1
-            label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 16)
-            label.textColor = .white
-            label.text = "사진 번역"
-            return label
-        }()
-        self.navigationItem.title = "사진 번역"
-    }
+    
     // set category
     private func setCategory() {
-        createCategoryImage(mode: CategortKind.camera, bgColor: .white)
-        createCategoryImage(mode: CategortKind.album, bgColor: .white)
-        createCategoryImage(mode: CategortKind.record, bgColor: .white)
+        createCategoryImage(mode: CategoryKind.camera, bgColor: .white)
+        createCategoryImage(mode: CategoryKind.album, bgColor: .white)
+        createCategoryImage(mode: CategoryKind.record, bgColor: .white)
     }
     // Create select image location: 1. camera, 2. album 3. history
-    private func createCategoryImage(mode: CategortKind, bgColor: UIColor) {
-        // ContainerView로 사용할 뷰 생성
-        let containerView = RoundView()
-        containerView.backgroundColor = bgColor // 배경 색
+    private func createCategoryImage(mode: CategoryKind, bgColor: UIColor) {
+        // background view
+        let bgView = RoundView()
+        bgView.backgroundColor = bgColor
+        bgView.tag = mode.rawValue // 액션 메소드 구분을 위한 tag
         
-        // containerview에 들어갈 아이콘 이미지 뷰
+        // bgView에 들어갈 아이콘 이미지 뷰
         let categoryIV = UIImageView()
-        containerView.addSubview(categoryIV)
+        bgView.addSubview(categoryIV)
         
+        // create tapGesture
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapSelectImage(_:)))
+        bgView.addGestureRecognizer(tapGestureRecognizer) // enroll tap gesture
+        
+        // add constraint in categoryImageView
         categoryIV.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(150)
+            make.width.height.equalTo(150) // 크기 수정 필요
         }
         
         switch mode {
         case .camera:
             // 스택뷰 안에 들어갈 뷰 크기 설정
-            containerView.snp.makeConstraints { make in
+            bgView.snp.makeConstraints { make in
                 make.width.height.equalTo(200)
             }
             categoryIV.image = UIImage(systemName: "camera.fill")
@@ -103,10 +92,25 @@ final class MainPage: UIViewController {
         case .record:
             categoryIV.image = UIImage(systemName: "doc.text.image")
         }
-        categoryStackView.addArrangedSubview(containerView)
+        categoryStackView.addArrangedSubview(bgView) // stack view에 등록
+    }
+    // category 선택 액션 메소드
+    @objc func tapSelectImage(_ sender: UITapGestureRecognizer) {
+        switch sender.view?.tag {
+        case 0:
+            print("카메라 클릭")
+        case 1:
+            print("앨범 클릭")
+        case 2:
+            print("번역 기록 클릭")
+        default:
+            // nothing
+            break
+        }
     }
 }
 
+// MARK: - Swift UI preview
 #if DEBUG
 import SwiftUI
 
