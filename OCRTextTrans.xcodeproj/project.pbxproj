@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2813AC8128A4F11500F646B6 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2813AC8028A4F11500F646B6 /* CameraViewController.swift */; };
+		2813AC8328A51C4F00F646B6 /* StringDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2813AC8228A51C4F00F646B6 /* StringDescription.swift */; };
 		286C520528A2347300212EA4 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C520428A2347300212EA4 /* MainNavigationController.swift */; };
 		286C520828A2488700212EA4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 286C520728A2488700212EA4 /* SnapKit */; };
 		286C520A28A2969F00212EA4 /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C520928A2969F00212EA4 /* RoundView.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		2813AC8028A4F11500F646B6 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		2813AC8228A51C4F00F646B6 /* StringDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringDescription.swift; sourceTree = "<group>"; };
 		286C520228A2092400212EA4 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		286C520428A2347300212EA4 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		286C520928A2969F00212EA4 /* RoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				28F279E1289E5AF300D984A5 /* AppDelegate.swift */,
 				28F279E3289E5AF300D984A5 /* SceneDelegate.swift */,
 				28F279E5289E5AF300D984A5 /* ViewController.swift */,
+				2813AC8228A51C4F00F646B6 /* StringDescription.swift */,
 				28F279E7289E5AF300D984A5 /* Main.storyboard */,
 				28F279EA289E5AF400D984A5 /* Assets.xcassets */,
 				28F279EC289E5AF400D984A5 /* LaunchScreen.storyboard */,
@@ -188,6 +191,7 @@
 				286C520528A2347300212EA4 /* MainNavigationController.swift in Sources */,
 				286C520A28A2969F00212EA4 /* RoundView.swift in Sources */,
 				28F279E6289E5AF300D984A5 /* ViewController.swift in Sources */,
+				2813AC8328A51C4F00F646B6 /* StringDescription.swift in Sources */,
 				28F279E2289E5AF300D984A5 /* AppDelegate.swift in Sources */,
 				28CE619E28A3DFE30038010A /* PermissionManager.swift in Sources */,
 				28F279E4289E5AF300D984A5 /* SceneDelegate.swift in Sources */,

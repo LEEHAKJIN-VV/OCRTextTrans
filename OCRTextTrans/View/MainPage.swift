@@ -100,9 +100,6 @@ final class MainPage: UIViewController {
         case 0:
             print("카메라 클릭")
             self.navigationController?.pushViewController(CameraViewController(), animated: true)
-            //cameraCaptureview = CameraCaptureView()
-            //self.present(cameraCaptureview, animated: true)
-            //cameraCaptureview.startCamera()
         case 1:
             print("앨범 클릭")
         case 2:

@@ -56,14 +56,44 @@ class CameraViewController: UIViewController {
     func startCamera() {
         // 카메라 접근 권한을 확인 true면 승인 false면 승인이 안된 상태이므로 카메라 승인을 요청해야 함
         Task {
-            let requestStatus = await permissionManager.getCameraAuthorizationStatus()
-            if requestStatus { // 카메라 권한 승인
+            let requestStatus: PermissionManager.CameraPermission = await permissionManager.getCameraAuthorizationStatus()
+            switch requestStatus {
+            case .authorize:
                 self.setUpcamera()
-            } else { // 권한을 재 요청하는 alert 생성
-                
+                break
+            case .deny:
+                self.cameraDenied() // 카메라 권한이 거부된 경우
+                break
+            default:
+                self.navigationController?.popViewController(animated: false)
+                break
             }
         }
     }
+    // 카메라 권한이 거부된 경우 Alert를 생성하여 카메라 권한 설정 요청
+    private func cameraDenied() {
+        // alert 생성
+        let alert = UIAlertController(title: StringDescription.CamPermission.title.rawValue,
+                                      message:StringDescription.CamPermission.content.rawValue,
+                                      preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel) { (_) in // 카메라 권한 승인을 취소한 경우 뒤로가기
+            self.navigationController?.popViewController(animated: false) // 뒤로 가기
+        }
+        let ok = UIAlertAction(title: "확인", style: .default) { (_) in
+            let settingsURL = URL(string: UIApplication.openSettingsURLString)! // 설정 url
+            if UIApplication.shared.canOpenURL(settingsURL) { // setting 앱을 열 수 있는 경우
+                UIApplication.shared.open(settingsURL) // 설정 앱 열기
+            }
+            self.navigationController?.popViewController(animated: false)
+        }
+        // AlertAction 버튼 등록
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        
+        self.present(alert, animated: false) // alert 열기
+    }
+    
     // 카메라 셋팅
     private func setUpcamera() {
         // 임시 session 생성
