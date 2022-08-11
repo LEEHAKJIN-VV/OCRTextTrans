@@ -16,9 +16,6 @@ enum CategoryKind: Int{
 
 // MARK: - MainPage
 final class MainPage: UIViewController {
-    
-    var cameraCaptureview = CameraCaptureView()
-    
     private var categoryStackView: UIStackView = {
         let stackView = UIStackView()
         // 세부적인 사항 수정 필요
@@ -102,7 +99,10 @@ final class MainPage: UIViewController {
         switch sender.view?.tag {
         case 0:
             print("카메라 클릭")
-            cameraCaptureview.startCamera()
+            self.navigationController?.pushViewController(CameraViewController(), animated: true)
+            //cameraCaptureview = CameraCaptureView()
+            //self.present(cameraCaptureview, animated: true)
+            //cameraCaptureview.startCamera()
         case 1:
             print("앨범 클릭")
         case 2:
