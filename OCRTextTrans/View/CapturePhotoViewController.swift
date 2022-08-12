@@ -21,9 +21,7 @@ class CapturePhotoViewController: UIViewController {
     private lazy var bottomStackView: UIStackView = { // 하단 스택 뷰
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.spacing = 32
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalCentering
         stackView.backgroundColor = .red
         return stackView
     }()
@@ -65,20 +63,18 @@ class CapturePhotoViewController: UIViewController {
         bottomStackView.addArrangedSubview(transBtn)
         // 스택 뷰를 containerView에 등록
         bottomContainerView.addSubview(bottomStackView)
+        
+        reCaptureBtn.addTarget(self, action: #selector(reCapturePhoto(_:)), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // 제약 조건
-        cropBtn.snp.makeConstraints { make in
-            make.width.equalTo(100)
-            make.height.equalTo(50)
+        bottomStackView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(32)
         }
         
-        bottomStackView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
-        }
         bottomContainerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.snp.bottom)
@@ -90,7 +86,11 @@ class CapturePhotoViewController: UIViewController {
             make.top.equalToSuperview()
             make.bottom.equalTo(self.bottomContainerView.snp.top)
         }
-        
+    }
+    
+    // 다시 사진을 찍는 액션 메소드
+    @objc func reCapturePhoto(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true)
     }
 }
 

@@ -27,6 +27,7 @@ class CameraViewController: UIViewController {
     private var permissionManager = PermissionManager() // 권한 매니저
     
     override func viewDidLoad() {
+        print("viewDidLoad call")
         self.view.backgroundColor = .black // 카메라 뷰 배경 색
         self.view.layer.addSublayer(previewLayer) // 카메라 capture flow 뷰
         self.view.addSubview(captureButton) // 캡처 버튼
@@ -36,6 +37,7 @@ class CameraViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        print("viewDidLayoutSubviews call")
         super.viewDidLayoutSubviews()
         previewLayer.frame = self.view.bounds // 카메라 송출 화면 frame 조정
         
@@ -47,6 +49,7 @@ class CameraViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        print("viewDidDisappear call")
         self.session?.stopRunning() // 카메라 session을 멈춤
     }
     // 촬영 버튼 액션 메소드

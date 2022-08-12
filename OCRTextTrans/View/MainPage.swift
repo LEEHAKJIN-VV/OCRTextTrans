@@ -16,27 +16,55 @@ enum CategoryKind: Int{
 
 // MARK: - MainPage
 final class MainPage: UIViewController {
+    // 루트 뷰의 서브 뷰인 컨테이너 뷰
+    private var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .yellow
+        return view
+    }()
+    // 카테고리 스택 뷰
     private var categoryStackView: UIStackView = {
         let stackView = UIStackView()
-        // 세부적인 사항 수정 필요
         stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.spacing = 16
         stackView.distribution = .fillEqually
+        stackView.backgroundColor = .yellow
         return stackView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .yellow
-        self.view.addSubview(categoryStackView) // Add StackView
+        self.view.addSubview(containerView) // rootview에 containerview 추가
+        self.containerView.addSubview(categoryStackView) // containerview에 stackview 추가
         self.setNavigationBarAppear() // Custom navigation Bar
         self.setCategory() // Category 생성
     }
-    // 메소드 호출 시점 확인 필요!!
+    
     override func viewDidLayoutSubviews() {
-        categoryStackView.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
+        // screen안의 content들의 constraint 설정
+        self.containerView.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.bottom.equalTo(self.view)
+        }
+
+        self.categoryStackView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(self.containerView).inset(100)
+            make.bottom.top.equalTo(self.containerView).inset(100)
+        }
+        categoryStackView.spacing = 32 // spacing은 스택뷰의 서브 뷰들이 배치되고 나서 호출
+    }
+    // category 선택 액션 메소드
+    @objc func tapSelectImage(_ sender: UITapGestureRecognizer) {
+        switch sender.view?.tag {
+        case 0:
+            print("카메라 클릭")
+            self.navigationController?.pushViewController(CameraViewController(), animated: true)
+        case 1:
+            print("앨범 클릭")
+        case 2:
+            print("번역 기록 클릭")
+        default:
+            // nothing
+            break
         }
     }
     
@@ -60,52 +88,24 @@ final class MainPage: UIViewController {
     }
     // Create select image location: 1. camera, 2. album 3. history
     private func createCategoryImage(mode: CategoryKind, bgColor: UIColor) {
-        // background view
-        let bgView = RoundView()
-        bgView.backgroundColor = bgColor
-        bgView.tag = mode.rawValue // 액션 메소드 구분을 위한 tag
-        
-        // bgView에 들어갈 아이콘 이미지 뷰
+        // 이미지 뷰
         let categoryIV = UIImageView()
-        bgView.addSubview(categoryIV)
+        categoryIV.backgroundColor = bgColor
+        categoryIV.tag = mode.rawValue
+        categoryIV.isUserInteractionEnabled = true
+        categoryStackView.addArrangedSubview(categoryIV) // 스택뷰의 서브 뷰로 이미지 뷰 추가
         
         // create tapGesture
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapSelectImage(_:)))
-        bgView.addGestureRecognizer(tapGestureRecognizer) // enroll tap gesture
-        
-        // add constraint in categoryImageView
-        categoryIV.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.height.equalTo(150) // 크기 수정 필요
-        }
-        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(tapSelectImage(_:)))
+        categoryIV.addGestureRecognizer(tapGestureRecognizer) // enroll tap gesture
+        // 카테고리의 이미지 설정
         switch mode {
         case .camera:
-            // 스택뷰 안에 들어갈 뷰 크기 설정
-            bgView.snp.makeConstraints { make in
-                make.width.height.equalTo(200)
-            }
             categoryIV.image = UIImage(systemName: "camera.fill")
         case .album:
             categoryIV.image = UIImage(systemName: "photo.fill")
         case .record:
             categoryIV.image = UIImage(systemName: "doc.text.image")
-        }
-        categoryStackView.addArrangedSubview(bgView) // stack view에 등록
-    }
-    // category 선택 액션 메소드
-    @objc func tapSelectImage(_ sender: UITapGestureRecognizer) {
-        switch sender.view?.tag {
-        case 0:
-            print("카메라 클릭")
-            self.navigationController?.pushViewController(CameraViewController(), animated: true)
-        case 1:
-            print("앨범 클릭")
-        case 2:
-            print("번역 기록 클릭")
-        default:
-            // nothing
-            break
         }
     }
 }

@@ -14,6 +14,6 @@ class RoundView: UIView {
         super.layoutSubviews()
         
         self.clipsToBounds = true
-        self.layer.cornerRadius = self.bounds.height / 2.0
+        self.layer.cornerRadius = self.frame.width / 2
     }
 }
