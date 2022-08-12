@@ -21,7 +21,6 @@ final class MainPage: UIViewController {
         // 세부적인 사항 수정 필요
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.distribution = .equalSpacing
         stackView.spacing = 16
         stackView.distribution = .fillEqually
         return stackView

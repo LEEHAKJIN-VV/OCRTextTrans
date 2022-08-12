@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2813AC8128A4F11500F646B6 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2813AC8028A4F11500F646B6 /* CameraViewController.swift */; };
 		2813AC8328A51C4F00F646B6 /* StringDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2813AC8228A51C4F00F646B6 /* StringDescription.swift */; };
+		2813AC8628A5317000F646B6 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 2813AC8528A5317000F646B6 /* CropViewController */; };
+		2813AC8828A5317000F646B6 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 2813AC8728A5317000F646B6 /* TOCropViewController */; };
+		2813AC8C28A54D2600F646B6 /* CapturePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2813AC8B28A54D2600F646B6 /* CapturePhotoViewController.swift */; };
 		286C520528A2347300212EA4 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C520428A2347300212EA4 /* MainNavigationController.swift */; };
 		286C520828A2488700212EA4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 286C520728A2488700212EA4 /* SnapKit */; };
 		286C520A28A2969F00212EA4 /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C520928A2969F00212EA4 /* RoundView.swift */; };
@@ -25,6 +28,7 @@
 /* Begin PBXFileReference section */
 		2813AC8028A4F11500F646B6 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		2813AC8228A51C4F00F646B6 /* StringDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringDescription.swift; sourceTree = "<group>"; };
+		2813AC8B28A54D2600F646B6 /* CapturePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturePhotoViewController.swift; sourceTree = "<group>"; };
 		286C520228A2092400212EA4 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		286C520428A2347300212EA4 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		286C520928A2969F00212EA4 /* RoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
@@ -45,6 +49,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				286C520828A2488700212EA4 /* SnapKit in Frameworks */,
+				2813AC8828A5317000F646B6 /* TOCropViewController in Frameworks */,
+				2813AC8628A5317000F646B6 /* CropViewController in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +64,7 @@
 				286C520428A2347300212EA4 /* MainNavigationController.swift */,
 				286C520928A2969F00212EA4 /* RoundView.swift */,
 				2813AC8028A4F11500F646B6 /* CameraViewController.swift */,
+				2813AC8B28A54D2600F646B6 /* CapturePhotoViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -129,6 +136,8 @@
 			name = OCRTextTrans;
 			packageProductDependencies = (
 				286C520728A2488700212EA4 /* SnapKit */,
+				2813AC8528A5317000F646B6 /* CropViewController */,
+				2813AC8728A5317000F646B6 /* TOCropViewController */,
 			);
 			productName = OCRTextTrans;
 			productReference = 28F279DE289E5AF300D984A5 /* OCRTextTrans.app */;
@@ -160,6 +169,7 @@
 			mainGroup = 28F279D5289E5AF300D984A5;
 			packageReferences = (
 				286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 			);
 			productRefGroup = 28F279DF289E5AF300D984A5 /* Products */;
 			projectDirPath = "";
@@ -194,6 +204,7 @@
 				2813AC8328A51C4F00F646B6 /* StringDescription.swift in Sources */,
 				28F279E2289E5AF300D984A5 /* AppDelegate.swift in Sources */,
 				28CE619E28A3DFE30038010A /* PermissionManager.swift in Sources */,
+				2813AC8C28A54D2600F646B6 /* CapturePhotoViewController.swift in Sources */,
 				28F279E4289E5AF300D984A5 /* SceneDelegate.swift in Sources */,
 				28CE619A28A37AA70038010A /* MainPage.swift in Sources */,
 				2813AC8128A4F11500F646B6 /* CameraViewController.swift in Sources */,
@@ -420,6 +431,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TimOliver/TOCropViewController.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -431,6 +450,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2813AC8528A5317000F646B6 /* CropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = CropViewController;
+		};
+		2813AC8728A5317000F646B6 /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
+		};
 		286C520728A2488700212EA4 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit" */;
