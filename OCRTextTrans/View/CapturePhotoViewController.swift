@@ -11,10 +11,21 @@ import CropViewController
 
 // MARK: - 카메라로 사진을 찍은 뒤 결과를 보여주는 메소드
 class CapturePhotoViewController: UIViewController {
-    private var captureIV: UIImageView! // 찍은 사진을 보여주는 이미지 뷰
+    private lazy var captureIV: UIImageView = { // 찍은 사진을 보여주는 이미지 뷰
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private lazy var topContainerView: UIView = { // 상단 뷰
+        let view = UIView()
+        view.backgroundColor = .black
+        return view
+    }()
+    
     private lazy var bottomContainerView: UIView = { // 하단 뷰
         let view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = .black
         return view
     }()
     
@@ -22,7 +33,7 @@ class CapturePhotoViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalCentering
-        stackView.backgroundColor = .red
+        stackView.backgroundColor = .black
         return stackView
     }()
     
@@ -45,9 +56,8 @@ class CapturePhotoViewController: UIViewController {
     }()
     
     init(image: UIImage) { // 생성자: 이전 화면에서 찍은 사진을 받음
-        captureIV = UIImageView(image: image)
-        captureIV.contentMode = .scaleAspectFit
         super.init(nibName: nil, bundle: nil)
+        self.captureIV.image = image
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -55,25 +65,33 @@ class CapturePhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 뷰 등록
+        self.view.backgroundColor = .black
         self.view.addSubview(captureIV)
+        self.view.addSubview(topContainerView)
         self.view.addSubview(bottomContainerView)
-        // 스택 뷰안에 content 등록
         bottomStackView.addArrangedSubview(cropBtn)
         bottomStackView.addArrangedSubview(reCaptureBtn)
         bottomStackView.addArrangedSubview(transBtn)
-        // 스택 뷰를 containerView에 등록
         bottomContainerView.addSubview(bottomStackView)
         // 액션 메소드 등록
         reCaptureBtn.addTarget(self, action: #selector(reCapturePhoto(_:)), for: .touchUpInside)
         cropBtn.addTarget(self, action: #selector(cropImage(_:)), for: .touchUpInside)
-        
-        //self.view.backgroundColor = .red
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // 제약 조건
+        topContainerView.snp.makeConstraints { make in
+            make.height.equalTo(100)
+            make.top.equalTo(self.view.snp.top)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(self.captureIV.snp.top)
+        }
+        captureIV.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(self.bottomContainerView.snp.top)
+        }
+        
         bottomStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(32)
@@ -82,14 +100,9 @@ class CapturePhotoViewController: UIViewController {
         bottomContainerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.snp.bottom)
-            make.height.equalTo(100)
+            make.height.equalTo(150)
         }
         
-        captureIV.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalTo(self.bottomContainerView.snp.top)
-        }
     }
     // MARK: - 나중에 액션 메소드를 하나로 합쳐 switch문으로 수정할 수 있음
     // 다시 사진을 찍는 액션 메소드
@@ -99,7 +112,7 @@ class CapturePhotoViewController: UIViewController {
     // 찍은 이미지를 crop할 뷰컨트롤러 생성
     @objc func cropImage(_ sender: Any) {
         let cropviewController = CropViewController(image: self.captureIV.image!)
-        cropviewController.delegate = self
+        cropviewController.delegate = self // delegate 위임
         present(cropviewController, animated: true)
     }
 }
@@ -132,7 +145,7 @@ struct CaptureViewControllerRepresentable: UIViewControllerRepresentable {
     }
     @available(iOS 13.0, *)
     func makeUIViewController(context: Context) -> UIViewController {
-        CapturePhotoViewController(image: UIImage(named: "screenshot") ?? UIImage())
+        CapturePhotoViewController(image: UIImage(named: "ocr2.HEIC") ?? UIImage())
         
     }
     @available(iOS 13.0, *)
