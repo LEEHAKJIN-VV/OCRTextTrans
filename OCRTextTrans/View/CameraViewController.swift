@@ -8,8 +8,6 @@ import Foundation
 import AVFoundation
 import UIKit
 import SnapKit
-import TOCropViewController
-import CropViewController
 
 class CameraViewController: UIViewController {
     var session: AVCaptureSession?
@@ -34,6 +32,10 @@ class CameraViewController: UIViewController {
         self.startCamera() // 카메라 기능 시작
         
         captureButton.addTarget(self, action: #selector(didTapTakePhoto), for: .touchUpInside) // action method 등록
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear call")
+        self.session?.startRunning() // block method
     }
     
     override func viewDidLayoutSubviews() {
@@ -143,35 +145,8 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
             let captureVC = CapturePhotoViewController(image: cpImg) // 찍은 사진을 보여줄 뷰 컨트롤러 생성
             captureVC.modalPresentationStyle = .fullScreen
             present(captureVC, animated: true) // 화면 전환
-        } else { }
-        
-        
-//        let cropviewController = CropViewController(image: image!)
-//        cropviewController.delegate = self
-//        present(cropviewController, animated: true)
-//
-//        present(CaptureViewController(), animated: true) // modal 방식
-        
-        
+        } else { // error
+            
+        }
     }
 }
-
-//extension CameraViewController: CropViewControllerDelegate {
-//    
-//    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
-//        print("크롭핑 됨")
-//        let imageView = UIImageView(image: image)
-//        imageView.contentMode = .scaleAspectFill
-//        imageView.frame = self.view.bounds
-//
-//        view.addSubview(imageView) // 임시로 화면에 표시
-//    }
-//    
-//    func cropViewController(_ cropViewController: CropViewController, didFinishCancelled cancelled: Bool) {
-//        print("취소 버튼 누름")
-//        self.dismiss(animated: false)
-//        //self.navigationController?.popViewController(animated: true)
-//    }
-//    
-//    
-//}

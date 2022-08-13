@@ -46,6 +46,7 @@ class CapturePhotoViewController: UIViewController {
     
     init(image: UIImage) { // 생성자: 이전 화면에서 찍은 사진을 받음
         captureIV = UIImageView(image: image)
+        captureIV.contentMode = .scaleAspectFit
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -63,8 +64,11 @@ class CapturePhotoViewController: UIViewController {
         bottomStackView.addArrangedSubview(transBtn)
         // 스택 뷰를 containerView에 등록
         bottomContainerView.addSubview(bottomStackView)
-        
+        // 액션 메소드 등록
         reCaptureBtn.addTarget(self, action: #selector(reCapturePhoto(_:)), for: .touchUpInside)
+        cropBtn.addTarget(self, action: #selector(cropImage(_:)), for: .touchUpInside)
+        
+        //self.view.backgroundColor = .red
     }
     
     override func viewDidLayoutSubviews() {
@@ -87,14 +91,37 @@ class CapturePhotoViewController: UIViewController {
             make.bottom.equalTo(self.bottomContainerView.snp.top)
         }
     }
-    
+    // MARK: - 나중에 액션 메소드를 하나로 합쳐 switch문으로 수정할 수 있음
     // 다시 사진을 찍는 액션 메소드
     @objc func reCapturePhoto(_ sender: Any) {
         self.presentingViewController?.dismiss(animated: true)
     }
+    // 찍은 이미지를 crop할 뷰컨트롤러 생성
+    @objc func cropImage(_ sender: Any) {
+        let cropviewController = CropViewController(image: self.captureIV.image!)
+        cropviewController.delegate = self
+        present(cropviewController, animated: true)
+    }
 }
 
+/*
+MARK: - TOCropViewController 패키지의 CropViewControllerDelegate 프로토콜 구현
+ 아래 두 메소드는 이미지를 crop하거나 crop을 취소한 경우 호출되는 delegate method
+ */
+extension CapturePhotoViewController: CropViewControllerDelegate {
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        print("크롭핑 됨")
+        self.captureIV.image = image
+        self.dismiss(animated: true)
+    }
+    
+    func cropViewController(_ cropViewController: CropViewController, didFinishCancelled cancelled: Bool) {
+        print("취소 버튼 누름")
+        self.dismiss(animated: false)
+    }
+}
 
+// MARK: - Swift UI preview
 #if DEBUG
 import SwiftUI
 
