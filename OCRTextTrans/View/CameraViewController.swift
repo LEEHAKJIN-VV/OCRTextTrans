@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 class CameraViewController: UIViewController {
+    private var captureViewController: CapturePhotoViewController?
+    
     var session: AVCaptureSession?
     let output = AVCapturePhotoOutput()
     let previewLayer = AVCaptureVideoPreviewLayer()
@@ -97,6 +99,7 @@ class CameraViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         print("viewDidDisappear call")
         self.session?.stopRunning() // 카메라 session을 멈춤
+        self.captureViewController = nil // capturephoto 프로퍼티를 nil로 초기화
     }
     // 촬영 버튼 액션 메소드
     @objc private func didTapTakePhoto() {
@@ -172,7 +175,6 @@ class CameraViewController: UIViewController {
             self.session?.startRunning() // session start
         }
     }
-    
 }
 
 // MARK: - 사진을 캡처했을 때 결과를 알리는 protocol
@@ -181,17 +183,16 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
         guard let data = photo.fileDataRepresentation() else {
             return
         }
-        let image = UIImage(data: data)
-        
+        // captureViewController가 nil이 아닌경우 이미 찍은 사진이 있으므로 바로 함수 종료
+        guard self.captureViewController == nil else {
+            return
+        }
+        let image = UIImage(data: data)!
         self.session?.stopRunning() // 이미지를 캡쳐한 경우 session 종료
         
-        if let cpImg = image { //
-            let captureVC = CapturePhotoViewController(image: cpImg) // 찍은 사진을 보여줄 뷰 컨트롤러 생성
-            captureVC.modalPresentationStyle = .fullScreen
-            present(captureVC, animated: true) // 화면 전환
-        } else { // error
-            
-        }
+        self.captureViewController = CapturePhotoViewController(image: image)
+        captureViewController?.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(captureViewController!, animated: true)
     }
 }
 
