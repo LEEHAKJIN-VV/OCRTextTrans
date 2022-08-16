@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         // Change Root View Controller
-        //window?.rootViewController = CapturePhotoViewController(image: UIImage())
         window?.rootViewController = MainNavgationController()
+        //window?.rootViewController = CaptureImageTransView()
         
     }
 

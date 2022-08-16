@@ -69,13 +69,15 @@ class CapturePhotoViewController: UIViewController {
         self.view.addSubview(captureIV)
         self.view.addSubview(topContainerView)
         self.view.addSubview(bottomContainerView)
-        bottomStackView.addArrangedSubview(cropBtn)
-        bottomStackView.addArrangedSubview(reCaptureBtn)
-        bottomStackView.addArrangedSubview(transBtn)
-        bottomContainerView.addSubview(bottomStackView)
+        self.bottomStackView.addArrangedSubview(cropBtn)
+        self.bottomStackView.addArrangedSubview(reCaptureBtn)
+        self.bottomStackView.addArrangedSubview(transBtn)
+        self.bottomContainerView.addSubview(bottomStackView)
+        self.navigationItem.title = nil
         // 액션 메소드 등록
-        reCaptureBtn.addTarget(self, action: #selector(reCapturePhoto(_:)), for: .touchUpInside)
-        cropBtn.addTarget(self, action: #selector(cropImage(_:)), for: .touchUpInside)
+        reCaptureBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
+        cropBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
+        transBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -104,16 +106,24 @@ class CapturePhotoViewController: UIViewController {
         }
         
     }
-    // MARK: - 나중에 액션 메소드를 하나로 합쳐 switch문으로 수정할 수 있음
-    // 다시 사진을 찍는 액션 메소드
-    @objc func reCapturePhoto(_ sender: Any) {
-        self.presentingViewController?.dismiss(animated: true)
-    }
-    // 찍은 이미지를 crop할 뷰컨트롤러 생성
-    @objc func cropImage(_ sender: Any) {
-        let cropviewController = CropViewController(image: self.captureIV.image!)
-        cropviewController.delegate = self // delegate 위임
-        present(cropviewController, animated: true)
+    // 하단에 위치한 버튼의 액션메소드 버튼의 타이틀로 버튼을 구분
+    @objc func bottomBtnClick(_ sender: UIButton) {
+        guard let btnTitle = sender.title(for: .normal) else {
+            return
+        }
+        switch btnTitle {
+        case "자르기":
+            let cropviewController = CropViewController(image: self.captureIV.image!)
+            cropviewController.delegate = self // delegate 위임
+            present(cropviewController, animated: true)
+        case "다시 찍기":
+            self.navigationController?.popViewController(animated: true)
+        case "번역":
+            let captureImageTransVC = CaptureImageTransView()
+            self.navigationController?.pushViewController(captureImageTransVC, animated: true)
+        default:
+            fatalError()
+        }
     }
 }
 
