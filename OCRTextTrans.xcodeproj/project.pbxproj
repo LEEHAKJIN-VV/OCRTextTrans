@@ -148,7 +148,6 @@
 				0CD8137D2A8BC63EAEEBA432 /* Pods-OCRTextTrans.debug.xcconfig */,
 				A7D60A967804DE05B602C3DB /* Pods-OCRTextTrans.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -205,8 +204,8 @@
 			);
 			mainGroup = 28F279D5289E5AF300D984A5;
 			packageReferences = (
-				286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
-				2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController.git" */,
+				286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 			);
 			productRefGroup = 28F279DF289E5AF300D984A5 /* Products */;
 			projectDirPath = "";
@@ -532,7 +531,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController.git" */ = {
+		2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TimOliver/TOCropViewController.git";
 			requirement = {
@@ -540,7 +539,7 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -553,17 +552,17 @@
 /* Begin XCSwiftPackageProductDependency section */
 		2813AC8528A5317000F646B6 /* CropViewController */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController.git" */;
+			package = 2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
 			productName = CropViewController;
 		};
 		2813AC8728A5317000F646B6 /* TOCropViewController */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController.git" */;
+			package = 2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
 			productName = TOCropViewController;
 		};
 		286C520728A2488700212EA4 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = 286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -11,6 +11,9 @@ import CropViewController
 
 // MARK: - 카메라로 사진을 찍은 뒤 결과를 보여주는 메소드
 class CapturePhotoViewController: UIViewController {
+    private let screenWidth = UIScreen.main.bounds.width - 20 // screen width
+    private let screenHeight = UIScreen.main.bounds.height // screen height
+    
     private lazy var captureIV: UIImageView = { // 찍은 사진을 보여주는 이미지 뷰
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -19,13 +22,17 @@ class CapturePhotoViewController: UIViewController {
     
     private lazy var topContainerView: UIView = { // 상단 뷰
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .lightGray
         return view
     }()
+//    private lazy var languageButton: UIButton = {
+//
+//
+//    }
     
     private lazy var bottomContainerView: UIView = { // 하단 뷰
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .lightGray
         return view
     }()
     
@@ -33,7 +40,7 @@ class CapturePhotoViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalCentering
-        stackView.backgroundColor = .black
+        stackView.backgroundColor = .lightGray
         return stackView
     }()
     
@@ -69,11 +76,12 @@ class CapturePhotoViewController: UIViewController {
         self.view.addSubview(captureIV)
         self.view.addSubview(topContainerView)
         self.view.addSubview(bottomContainerView)
+        
         self.bottomStackView.addArrangedSubview(cropBtn)
         self.bottomStackView.addArrangedSubview(reCaptureBtn)
         self.bottomStackView.addArrangedSubview(transBtn)
         self.bottomContainerView.addSubview(bottomStackView)
-        self.navigationItem.title = nil
+        self.navigationItem.title = "사진"
         // 액션 메소드 등록
         reCaptureBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
         cropBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
@@ -84,9 +92,8 @@ class CapturePhotoViewController: UIViewController {
         super.viewDidLayoutSubviews()
         // 제약 조건
         topContainerView.snp.makeConstraints { make in
-            make.height.equalTo(100)
-            make.top.equalTo(self.view.snp.top)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalTo(self.screenHeight/11)
             make.bottom.equalTo(self.captureIV.snp.top)
         }
         captureIV.snp.makeConstraints { make in
@@ -102,7 +109,7 @@ class CapturePhotoViewController: UIViewController {
         bottomContainerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.snp.bottom)
-            make.height.equalTo(150)
+            make.height.equalTo(self.screenHeight/11)
         }
         
     }

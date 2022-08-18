@@ -12,7 +12,8 @@ import SnapKit
 class CaptureImageTransView: UIViewController {
     private let screenWidth = UIScreen.main.bounds.width - 20
     private let screenHeight = UIScreen.main.bounds.height / 3
-    private var languageList: [String] = ["한국어","영어","중국어","일본어"] // 임시 데이터
+    
+    private var transLanguage: String = "" // 번역할 언어
 
     // UIView object
     private lazy var textContainerView: UIView = { // 번역 화면의 컨테이너 뷰
@@ -112,53 +113,24 @@ class CaptureImageTransView: UIViewController {
     }
     
     @objc func clickLanBtn(_ sender: Any) { // 언어를 선택하는 버튼
-        let vc = UIViewController()
-        vc.preferredContentSize = CGSize(width: screenWidth, height: screenHeight)
-        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
-        pickerView.dataSource = self
-        pickerView.delegate = self
+        let languageVC = LanguagePickerViewController() // 언어선택 피커뷰 생성
+        languageVC.preferredContentSize = CGSize(width: screenWidth, height: screenHeight)
         
-        vc.view.addSubview(pickerView)
-        pickerView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-        
-        let alert = UIAlertController(title: "언어 선택", message: "", preferredStyle: .actionSheet)
-        // 아이패드에서 사용되는 코드
+        let alert = UIAlertController(title: "언어 선택", message: "", preferredStyle: .actionSheet) // 피커뷰를 담을 alert 컨트롤러 생성
+//        아이패드 코드
 //        alert.popoverPresentationController?.sourceView = languageButton
 //        alert.popoverPresentationController?.sourceRect = languageButton.bounds
         
-        alert.setValue(vc, forKey: "contentViewController") // alert에 contentViewController 설정
+        alert.setValue(languageVC, forKey: "contentViewController")
         
         alert.addAction(UIAlertAction(title: "취소", style: .cancel) { (_) in
-            
+            // do something
         })
         alert.addAction(UIAlertAction(title: "선택", style: .default) { (_) in
-            print("현재 선택 언어: \(pickerView.selectedRow(inComponent: 0))")
+            self.transLanguage = languageVC.currentLanguage
+            print("현재 선택언어: \(self.transLanguage)")
         })
         self.present(alert, animated: true)
-    }
-}
-
-// MARK: - picker view를 구성하는데 필요한 protocol
-extension CaptureImageTransView: UIPickerViewDataSource {
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.languageList.count
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int { // component의 수를 반환
-        return 1
-    }
-}
-
-// MARK: - picker view delegate => picker를 선택했을때 관련된 protocol
-extension CaptureImageTransView: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let title = self.languageList[row]
-        return title
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("선택: \(self.languageList[row])")
     }
 }
 

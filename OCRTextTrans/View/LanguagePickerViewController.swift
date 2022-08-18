@@ -7,39 +7,45 @@
 
 import Foundation
 import UIKit
-// MARK: - LangguaguePickerViewController class
+import SnapKit
+// MARK: - LanguagePickerViewController
 class LanguagePickerViewController: UIViewController {
-    private var lanPickerView = UIPickerView() // 언어 선택 picker view
+    private let screenWidth = UIScreen.main.bounds.width - 20
+    private let screenHeight = UIScreen.main.bounds.height / 3
+    private var languageList: [String] = ["한국어","영어","중국어","일본어"] // 임시 데이터
     
-    private var languageList: [String] = ["한국어","영어","중국어","일본어"]
+    var currentLanguage: String = "한국어"
+    
+    private lazy var pickerView: UIPickerView = {
+        let pv = UIPickerView()
+        pv.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+        pv.dataSource = self
+        pv.delegate = self
+        return pv
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(lanPickerView)
-        self.lanPickerView.delegate = self
-        
-        lanPickerView.backgroundColor = .white
-        lanPickerView.setValue(UIColor.black, forKey: "textColor")
+        self.view.addSubview(pickerView)
     }
-    
     override func viewDidLayoutSubviews() {
-        lanPickerView.snp.makeConstraints { make in // pickerview가 view controller를 가득 채우게
-            make.edges.equalToSuperview()
+        super.viewDidLayoutSubviews()
+        self.pickerView.snp.makeConstraints { make in // 제약 설정
+            make.center.equalToSuperview()
         }
     }
+    
 }
 
 // MARK: - picker view를 구성하는데 필요한 protocol
 extension LanguagePickerViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int { // component의 수를 반환
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int { // 각 component의 해당하는 row의 수를 반환
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return self.languageList.count
     }
     
-    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { // component의 수를 반환
+        return 1
+    }
 }
 
 // MARK: - picker view delegate => picker를 선택했을때 관련된 protocol
@@ -49,7 +55,6 @@ extension LanguagePickerViewController: UIPickerViewDelegate {
         return title
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("선택: \(self.languageList[row])")
+        self.currentLanguage = self.languageList[row]
     }
 }
-
