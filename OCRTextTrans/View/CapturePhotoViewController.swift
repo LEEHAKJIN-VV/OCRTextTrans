@@ -25,10 +25,42 @@ class CapturePhotoViewController: UIViewController {
         view.backgroundColor = .lightGray
         return view
     }()
-//    private lazy var languageButton: UIButton = {
-//
-//
-//    }
+    private lazy var topStackview: UIStackView = { // 상단 스택 뷰
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .equalCentering
+        stackView.backgroundColor = .lightGray
+        return stackView
+    }()
+    
+    private lazy var recgonitionButton: UIButton = { // 이미지에서 인식할 언어
+        let button = UIButton()
+        button.setTitle("탐지 언어", for: .normal)
+        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        button.tintColor = .white
+        // 버튼의 라벨과 이미지의 위치 지정
+        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        return button
+    }()
+    private lazy var transLanguageButton: UIButton = { // 번역할 언어
+        let button = UIButton()
+        button.setTitle("번역될 언어", for: .normal)
+        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        button.tintColor = .white
+        
+        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        return button
+    }()
+    private lazy var languageSwitchButton: UIButton = { // 인식할 언어와 번역할 언어를 교환하는 버튼
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrow.left.arrow.right"), for: .normal)
+        button.tintColor = .white // set button icon color
+        return button
+    }()
     
     private lazy var bottomContainerView: UIView = { // 하단 뷰
         let view = UIView()
@@ -72,17 +104,23 @@ class CapturePhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // root view
         self.view.backgroundColor = .black
         self.view.addSubview(captureIV)
         self.view.addSubview(topContainerView)
         self.view.addSubview(bottomContainerView)
-        
+        // topContainer
+        self.topContainerView.addSubview(topStackview)
+        self.topStackview.addArrangedSubview(recgonitionButton)
+        self.topStackview.addArrangedSubview(languageSwitchButton)
+        self.topStackview.addArrangedSubview(transLanguageButton)
+        // bottomContainer
         self.bottomStackView.addArrangedSubview(cropBtn)
         self.bottomStackView.addArrangedSubview(reCaptureBtn)
         self.bottomStackView.addArrangedSubview(transBtn)
         self.bottomContainerView.addSubview(bottomStackView)
         self.navigationItem.title = "사진"
-        // 액션 메소드 등록
+        // attach action method
         reCaptureBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
         cropBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
         transBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
@@ -96,6 +134,11 @@ class CapturePhotoViewController: UIViewController {
             make.height.equalTo(self.screenHeight/11)
             make.bottom.equalTo(self.captureIV.snp.top)
         }
+        topStackview.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+        
         captureIV.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.bottomContainerView.snp.top)
