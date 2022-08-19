@@ -13,6 +13,7 @@
 		2813AC8828A5317000F646B6 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 2813AC8728A5317000F646B6 /* TOCropViewController */; };
 		2813AC8C28A54D2600F646B6 /* CapturePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2813AC8B28A54D2600F646B6 /* CapturePhotoViewController.swift */; };
 		2842E71E28A78E9B00D5FA2D /* ocr2.HEIC in Resources */ = {isa = PBXBuildFile; fileRef = 2842E71D28A78E9B00D5FA2D /* ocr2.HEIC */; };
+		2850EAD228AFC003007200DB /* SupportLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850EAD128AFC003007200DB /* SupportLanguageViewModel.swift */; };
 		286C520528A2347300212EA4 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C520428A2347300212EA4 /* MainNavigationController.swift */; };
 		286C520828A2488700212EA4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 286C520728A2488700212EA4 /* SnapKit */; };
 		286C520A28A2969F00212EA4 /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C520928A2969F00212EA4 /* RoundView.swift */; };
@@ -35,6 +36,7 @@
 		2813AC8228A51C4F00F646B6 /* StringDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringDescription.swift; sourceTree = "<group>"; };
 		2813AC8B28A54D2600F646B6 /* CapturePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturePhotoViewController.swift; sourceTree = "<group>"; };
 		2842E71D28A78E9B00D5FA2D /* ocr2.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocr2.HEIC; sourceTree = "<group>"; };
+		2850EAD128AFC003007200DB /* SupportLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportLanguageViewModel.swift; sourceTree = "<group>"; };
 		286C520228A2092400212EA4 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		286C520428A2347300212EA4 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		286C520928A2969F00212EA4 /* RoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 		28CE619F28A3E16A0038010A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2850EAD128AFC003007200DB /* SupportLanguageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				286C520528A2347300212EA4 /* MainNavigationController.swift in Sources */,
 				286C520A28A2969F00212EA4 /* RoundView.swift in Sources */,
 				28F279E6289E5AF300D984A5 /* ViewController.swift in Sources */,
+				2850EAD228AFC003007200DB /* SupportLanguageViewModel.swift in Sources */,
 				2813AC8328A51C4F00F646B6 /* StringDescription.swift in Sources */,
 				28F279E2289E5AF300D984A5 /* AppDelegate.swift in Sources */,
 				28DDF9CF28AA7D50008A7A2D /* LanguagePickerViewController.swift in Sources */,

@@ -8,13 +8,17 @@
 import Foundation
 import UIKit
 import SnapKit
+import Combine
+
 // MARK: - LanguagePickerViewController
 class LanguagePickerViewController: UIViewController {
     private let screenWidth = UIScreen.main.bounds.width - 20
     private let screenHeight = UIScreen.main.bounds.height / 3
-    private var languageList: [String] = ["한국어","영어","중국어","일본어"] // 임시 데이터
-    
     var currentLanguage: String = "한국어"
+    
+    var languageViewModel = SupportLanguageViewModel() // 지원하는 언어 뷰 모델
+    private var languageList: [String] = [] // 지원하는 언어 데이터 목록
+    var disposalbleBag = Set<AnyCancellable>() //
     
     private lazy var pickerView: UIPickerView = {
         let pv = UIPickerView()
@@ -27,6 +31,7 @@ class LanguagePickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(pickerView)
+        self.setBingds() // binding
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -34,7 +39,15 @@ class LanguagePickerViewController: UIViewController {
             make.center.equalToSuperview()
         }
     }
-    
+}
+// MARK: - view model
+extension LanguagePickerViewController {
+    // view model의 language list와 controller의 language list연결
+    private func setBingds() {
+        self.languageViewModel.$languageList.sink { (updatedList: [String]) in
+            self.languageList = updatedList
+        }.store(in: &disposalbleBag)
+    }
 }
 
 // MARK: - picker view를 구성하는데 필요한 protocol
