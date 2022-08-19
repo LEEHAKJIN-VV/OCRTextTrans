@@ -19,7 +19,6 @@ class CapturePhotoViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
     private lazy var topContainerView: UIView = { // 상단 뷰
         let view = UIView()
         view.backgroundColor = .lightGray
@@ -28,14 +27,13 @@ class CapturePhotoViewController: UIViewController {
     private lazy var topStackview: UIStackView = { // 상단 스택 뷰
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .equalCentering
+        stackView.distribution = .fillEqually
         stackView.backgroundColor = .lightGray
         return stackView
     }()
-    
-    private lazy var recgonitionButton: UIButton = { // 이미지에서 인식할 언어
+    private lazy var recgonitionButton: UIButton = { // 이미지에서 인식할 언어를 선택하는 버튼
         let button = UIButton()
-        button.setTitle("탐지 언어", for: .normal)
+        button.setTitle("영어", for: .normal)
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         button.tintColor = .white
         // 버튼의 라벨과 이미지의 위치 지정
@@ -44,9 +42,9 @@ class CapturePhotoViewController: UIViewController {
         button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         return button
     }()
-    private lazy var transLanguageButton: UIButton = { // 번역할 언어
+    private lazy var transtedLanguageButton: UIButton = { // 번역할 언어를 선택하는 버튼
         let button = UIButton()
-        button.setTitle("번역될 언어", for: .normal)
+        button.setTitle("한국어", for: .normal)
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         button.tintColor = .white
         
@@ -75,19 +73,16 @@ class CapturePhotoViewController: UIViewController {
         stackView.backgroundColor = .lightGray
         return stackView
     }()
-    
     private lazy var cropBtn: UIButton = { // 자르기 버튼
         let button = UIButton()
         button.setTitle("자르기", for: .normal)
         return button
     }()
-    
     private lazy var reCaptureBtn: UIButton = { // 다시 찍기 버튼
         let button = UIButton()
         button.setTitle("다시 찍기", for: .normal)
         return button
     }()
-    
     private lazy var transBtn: UIButton = { // 번역 버튼
         let button = UIButton()
         button.setTitle("번역", for: .normal)
@@ -113,17 +108,21 @@ class CapturePhotoViewController: UIViewController {
         self.topContainerView.addSubview(topStackview)
         self.topStackview.addArrangedSubview(recgonitionButton)
         self.topStackview.addArrangedSubview(languageSwitchButton)
-        self.topStackview.addArrangedSubview(transLanguageButton)
+        self.topStackview.addArrangedSubview(transtedLanguageButton)
         // bottomContainer
         self.bottomStackView.addArrangedSubview(cropBtn)
         self.bottomStackView.addArrangedSubview(reCaptureBtn)
         self.bottomStackView.addArrangedSubview(transBtn)
         self.bottomContainerView.addSubview(bottomStackView)
         self.navigationItem.title = "사진"
-        // attach action method
-        reCaptureBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
-        cropBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
-        transBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
+        // attach top action method
+        self.recgonitionButton.addTarget(self, action: #selector(topBtnclick(_:)), for: .touchUpInside)
+        self.languageSwitchButton.addTarget(self, action: #selector(topBtnclick(_:)), for: .touchUpInside)
+        self.transtedLanguageButton.addTarget(self, action: #selector(topBtnclick(_:)), for: .touchUpInside)
+        // attach bottom action method
+        self.reCaptureBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
+        self.cropBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
+        self.transBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -138,38 +137,62 @@ class CapturePhotoViewController: UIViewController {
             make.center.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(16)
         }
-        
         captureIV.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.bottomContainerView.snp.top)
         }
-        
         bottomStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(32)
         }
-        
         bottomContainerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.snp.bottom)
             make.height.equalTo(self.screenHeight/11)
         }
-        
     }
-    // 하단에 위치한 버튼의 액션메소드 버튼의 타이틀로 버튼을 구분
-    @objc func bottomBtnClick(_ sender: UIButton) {
-        guard let btnTitle = sender.title(for: .normal) else {
-            return
+    // 화면 상단의 액션 메소드
+    @objc func topBtnclick(_ sender: UIButton) { // 피커뷰 위치 선택한 위치로 옮기기
+        let languageVC = LanguagePickerViewController() // 언어선택 피커뷰 생성
+        languageVC.preferredContentSize = CGSize(width: screenWidth, height: screenHeight/3)
+        
+        let alert = UIAlertController(title: "언어 선택", message: "", preferredStyle: .actionSheet) // 피커뷰를 담을 alert 컨트롤러 생성
+        alert.setValue(languageVC, forKey: "contentViewController")
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel) { (_) in
+            // do something
+        })
+        switch sender {
+        case recgonitionButton: // 인식언어 버튼
+            alert.addAction(UIAlertAction(title: "선택", style: .default) { (_) in
+                self.recgonitionButton.setTitle(languageVC.currentLanguage, for: .normal) // 인식될 언어 선택
+            })
+            self.present(alert, animated: true)
+        case transtedLanguageButton: // 번역될 언어 버튼
+            alert.addAction(UIAlertAction(title: "선택", style: .default) { (_) in
+                self.transtedLanguageButton.setTitle(languageVC.currentLanguage, for: .normal) // 번역할 언어 선택
+            })
+            self.present(alert, animated: true)
+        case languageSwitchButton: // 언어 전환 버튼
+            let tmpLanguage = self.recgonitionButton.title(for: .normal)
+            self.recgonitionButton.setTitle(self.transtedLanguageButton.title(for: .normal)!, for: .normal)
+            self.transtedLanguageButton.setTitle(tmpLanguage, for: .normal)
+        default:
+            fatalError()
         }
-        switch btnTitle {
-        case "자르기":
+    }
+    // 하단 버튼의 액션 메소드
+    @objc func bottomBtnClick(_ sender: UIButton) {
+        switch sender {
+        case cropBtn: // 자르기 버튼
             let cropviewController = CropViewController(image: self.captureIV.image!)
             cropviewController.delegate = self // delegate 위임
             present(cropviewController, animated: true)
-        case "다시 찍기":
+        case reCaptureBtn: // 다시 찍기 버튼
             self.navigationController?.popViewController(animated: true)
-        case "번역":
-            let captureImageTransVC = CaptureImageTransView()
+        case transBtn: // 번역 버튼, 탐지 언어, 번역할 언어를 생성자로 전달
+            let captureImageTransVC = CaptureImageTransView(
+                recLanguage: self.recgonitionButton.title(for: .normal)!,
+                transLanguage: self.transtedLanguageButton.title(for: .normal)!)
             self.navigationController?.pushViewController(captureImageTransVC, animated: true)
         default:
             fatalError()
@@ -182,14 +205,13 @@ MARK: - TOCropViewController 패키지의 CropViewControllerDelegate 프로토�
  아래 두 메소드는 이미지를 crop하거나 crop을 취소한 경우 호출되는 delegate method
  */
 extension CapturePhotoViewController: CropViewControllerDelegate {
+    // crop이 완료된 경우
     func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
-        print("크롭핑 됨")
-        self.captureIV.image = image
+        self.captureIV.image = image // crop된 이미지를 현재 이미지로 변경
         self.dismiss(animated: true)
     }
-    
+    // crop이 취소된 경우
     func cropViewController(_ cropViewController: CropViewController, didFinishCancelled cancelled: Bool) {
-        print("취소 버튼 누름")
         self.dismiss(animated: false)
     }
 }
