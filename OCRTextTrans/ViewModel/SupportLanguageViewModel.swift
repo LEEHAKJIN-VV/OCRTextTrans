@@ -10,5 +10,10 @@ import Combine
 
 // MARK: - 이미지의 문자를 인식하는 언어, 번역가능한 언어를 담은 리스트
 class SupportLanguageViewModel: ObservableObject {
-    @Published var languageList: [String] = ["독일어","인도어","영어","일본어","중국어","한국어"] // 알파벳순으로 정렬 해야함
+    private var languagemodel: LanguageModel = LanguageModel()
+    @Published var languageList: [String] = [] // 언어 목록을 가지는 Publisher
+    
+    init() {
+        self.languageList = languagemodel.getLanguageList() // 언어 모델에서 언어 목록을 가져옴
+    }
 }

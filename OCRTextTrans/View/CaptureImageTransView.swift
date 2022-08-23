@@ -9,11 +9,12 @@ import Foundation
 import UIKit
 import SnapKit
 
+// 카메로라 찍은 이미지에서 텍스트를 추출하여 번역된 결과를 보여주는 뷰 컨트롤러
 class CaptureImageTransView: UIViewController {
     private let screenWidth = UIScreen.main.bounds.width - 20
     private let screenHeight = UIScreen.main.bounds.height / 3
     
-    private var recognitionLanguage: String = ""
+    private var recognitionLanguage: String = "" // 인식한 언어
     private var transLanguage: String = "" // 번역할 언어
 
     // UIView object
@@ -66,7 +67,7 @@ class CaptureImageTransView: UIViewController {
         button.contentVerticalAlignment = .fill
         return button
     }()
-    init(recLanguage: String, transLanguage: String) { // recLanguage: 탐지한 언어, transLanguage: 번역할 언어
+    init(image: UIImage, recLanguage: String, transLanguage: String) { // recLanguage: 탐지한 언어, transLanguage: 번역할 언어
         super.init(nibName: nil, bundle: nil)
         self.recognitionLanguage = recLanguage // 탐지할 언어
         self.transLanguage = transLanguage // 번역할 언어 변경

@@ -11,9 +11,6 @@ import CropViewController
 
 // MARK: - 카메라로 사진을 찍은 뒤 결과를 보여주는 메소드
 class CapturePhotoViewController: UIViewController {
-    private let screenWidth = UIScreen.main.bounds.width - 20 // screen width
-    private let screenHeight = UIScreen.main.bounds.height // screen height
-    
     private lazy var captureIV: UIImageView = { // 찍은 사진을 보여주는 이미지 뷰
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -24,16 +21,10 @@ class CapturePhotoViewController: UIViewController {
         view.backgroundColor = .lightGray
         return view
     }()
-    private lazy var topStackview: UIStackView = { // 상단 스택 뷰
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.backgroundColor = .lightGray
-        return stackView
-    }()
-    private lazy var recgonitionButton: UIButton = { // 이미지에서 인식할 언어를 선택하는 버튼
+    
+    private lazy var recognizeLanguageButton: UIButton = { // 이미지에서 텍스트를 인식할 언어를 선택하는 버튼
         let button = UIButton()
-        button.setTitle("영어", for: .normal)
+        button.setTitle(Constants.languageButtonTitle, for: .normal)
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         button.tintColor = .white
         // 버튼의 라벨과 이미지의 위치 지정
@@ -42,24 +33,6 @@ class CapturePhotoViewController: UIViewController {
         button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         return button
     }()
-    private lazy var transtedLanguageButton: UIButton = { // 번역할 언어를 선택하는 버튼
-        let button = UIButton()
-        button.setTitle("한국어", for: .normal)
-        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        button.tintColor = .white
-        
-        button.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        return button
-    }()
-    private lazy var languageSwitchButton: UIButton = { // 인식할 언어와 번역할 언어를 교환하는 버튼
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.left.arrow.right"), for: .normal)
-        button.tintColor = .white // set button icon color
-        return button
-    }()
-    
     private lazy var bottomContainerView: UIView = { // 하단 뷰
         let view = UIView()
         view.backgroundColor = .lightGray
@@ -83,9 +56,9 @@ class CapturePhotoViewController: UIViewController {
         button.setTitle("다시 찍기", for: .normal)
         return button
     }()
-    private lazy var transBtn: UIButton = { // 번역 버튼
+    private lazy var ocrBtn: UIButton = { // 번역 버튼
         let button = UIButton()
-        button.setTitle("번역", for: .normal)
+        button.setTitle("텍스트 탐지", for: .normal)
         return button
     }()
     
@@ -105,24 +78,18 @@ class CapturePhotoViewController: UIViewController {
         self.view.addSubview(topContainerView)
         self.view.addSubview(bottomContainerView)
         // topContainer
-        self.topContainerView.addSubview(topStackview)
-        self.topStackview.addArrangedSubview(recgonitionButton)
-        self.topStackview.addArrangedSubview(languageSwitchButton)
-        self.topStackview.addArrangedSubview(transtedLanguageButton)
+        self.topContainerView.addSubview(recognizeLanguageButton)
         // bottomContainer
         self.bottomStackView.addArrangedSubview(cropBtn)
         self.bottomStackView.addArrangedSubview(reCaptureBtn)
-        self.bottomStackView.addArrangedSubview(transBtn)
+        self.bottomStackView.addArrangedSubview(ocrBtn)
         self.bottomContainerView.addSubview(bottomStackView)
         self.navigationItem.title = "사진"
-        // attach top action method
-        self.recgonitionButton.addTarget(self, action: #selector(topBtnclick(_:)), for: .touchUpInside)
-        self.languageSwitchButton.addTarget(self, action: #selector(topBtnclick(_:)), for: .touchUpInside)
-        self.transtedLanguageButton.addTarget(self, action: #selector(topBtnclick(_:)), for: .touchUpInside)
-        // attach bottom action method
+        // attach action method
+        self.recognizeLanguageButton.addTarget(self, action: #selector(topBtnclick(_:)), for: .touchUpInside)
         self.reCaptureBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
         self.cropBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
-        self.transBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
+        self.ocrBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -130,12 +97,13 @@ class CapturePhotoViewController: UIViewController {
         // 제약 조건
         topContainerView.snp.makeConstraints { make in
             make.leading.trailing.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalTo(self.screenHeight/11)
+            make.height.equalTo(Constants.screenHeight/11)
             make.bottom.equalTo(self.captureIV.snp.top)
         }
-        topStackview.snp.makeConstraints { make in
+        recognizeLanguageButton.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalToSuperview()
+            make.leading.trailing.top.equalTo(self.view.safeAreaLayoutGuide)
         }
         captureIV.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -148,37 +116,27 @@ class CapturePhotoViewController: UIViewController {
         bottomContainerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.snp.bottom)
-            make.height.equalTo(self.screenHeight/11)
+            make.height.equalTo(Constants.screenHeight/11)
         }
     }
+}
+
+// MARK: - action method
+extension CapturePhotoViewController {
     // 화면 상단의 액션 메소드
     @objc func topBtnclick(_ sender: UIButton) { // 피커뷰 위치 선택한 위치로 옮기기
         let languageVC = LanguagePickerViewController() // 언어선택 피커뷰 생성
-        languageVC.preferredContentSize = CGSize(width: screenWidth, height: screenHeight/3)
+        languageVC.preferredContentSize = CGSize(width: Constants.screenWidth, height: Constants.screenHeight/3)
         
         let alert = UIAlertController(title: "언어 선택", message: "", preferredStyle: .actionSheet) // 피커뷰를 담을 alert 컨트롤러 생성
         alert.setValue(languageVC, forKey: "contentViewController")
-        alert.addAction(UIAlertAction(title: "취소", style: .cancel) { (_) in
-            // do something
+        alert.addAction(UIAlertAction(title: "선택", style: .default) { (_) in // ok button
+            DispatchQueue.main.async {
+                self.recognizeLanguageButton.setTitle(languageVC.currentLanguage, for: .normal)
+            }
         })
-        switch sender {
-        case recgonitionButton: // 인식언어 버튼
-            alert.addAction(UIAlertAction(title: "선택", style: .default) { (_) in
-                self.recgonitionButton.setTitle(languageVC.currentLanguage, for: .normal) // 인식될 언어 선택
-            })
-            self.present(alert, animated: true)
-        case transtedLanguageButton: // 번역될 언어 버튼
-            alert.addAction(UIAlertAction(title: "선택", style: .default) { (_) in
-                self.transtedLanguageButton.setTitle(languageVC.currentLanguage, for: .normal) // 번역할 언어 선택
-            })
-            self.present(alert, animated: true)
-        case languageSwitchButton: // 언어 전환 버튼
-            let tmpLanguage = self.recgonitionButton.title(for: .normal)
-            self.recgonitionButton.setTitle(self.transtedLanguageButton.title(for: .normal)!, for: .normal)
-            self.transtedLanguageButton.setTitle(tmpLanguage, for: .normal)
-        default:
-            fatalError()
-        }
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel) { (_) in }) // cancel button
+        self.present(alert, animated: true) // 언어 선택 피커뷰 뷰컨트롤러 전환
     }
     // 하단 버튼의 액션 메소드
     @objc func bottomBtnClick(_ sender: UIButton) {
@@ -189,15 +147,21 @@ class CapturePhotoViewController: UIViewController {
             present(cropviewController, animated: true)
         case reCaptureBtn: // 다시 찍기 버튼
             self.navigationController?.popViewController(animated: true)
-        case transBtn: // 번역 버튼, 탐지 언어, 번역할 언어를 생성자로 전달
-            let captureImageTransVC = CaptureImageTransView(
-                recLanguage: self.recgonitionButton.title(for: .normal)!,
-                transLanguage: self.transtedLanguageButton.title(for: .normal)!)
-            self.navigationController?.pushViewController(captureImageTransVC, animated: true)
+        case ocrBtn: // 번역 버튼: 이미지와 텍스트를 인식할 언어를 전달
+            let textRecognizerVC = TextRecognizerView(image: self.captureIV.image!, recLanguage: self.recognizeLanguageButton.title(for: .normal)!)
+            self.navigationController?.pushViewController(textRecognizerVC, animated: true)
         default:
             fatalError()
         }
     }
+    
+}
+
+// MARK: - Constants
+private enum Constants {
+    static let screenWidth = UIScreen.main.bounds.width - 20 // screen width
+    static let screenHeight = UIScreen.main.bounds.height // screen height
+    static let languageButtonTitle: String = "언어 선택"
 }
 
 /*
