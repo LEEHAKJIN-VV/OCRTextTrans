@@ -11,7 +11,11 @@ import SnapKit
 
 // MARK: - 이미지에서 텍스트를 인식한 후 이를 보여주는 뷰 컨트롤러, 텍스트를 추출하는 모델 코드 추가 예정
 class TextRecognizerView: UIViewController {
-    private var ocrModel: OCRModel? // 이미지에서 텍스트를 추출하는 모델
+    //private var ocrModel: OCRModel? // 이미지에서 텍스트를 추출하는 모델
+    //private var originalImage: UIImage = UIImage() // 기록 저장을 위한 오리지널 이미지
+    private var ocrModel: OCRModel // 이미지에서 텍스트를 추출하는 모델
+    private var originalImage: UIImage // 기록 저장을 위한 오리지널 이미지
+    private var recognizeLanguage: String // 이미지에서 텍스트를 인식할 언어
     
     private lazy var containerView: UIView = { // root view 역할을 하는 컨테이너 뷰
         let view = UIView()
@@ -30,14 +34,26 @@ class TextRecognizerView: UIViewController {
         return button
     }()
     
+    init(image: UIImage, recLanguage: String) { // image: 텍스트를 추출하기전 원본 이미지, recLanguage: 인식할 언어
+        // swift 2단계 초기화에 의해 서브 클래스의 프로퍼티 먼저 초기화 후, 슈퍼클래스의 init 호출
+        self.originalImage = image
+        self.recognizeLanguage = recLanguage
+        self.ocrModel = OCRModel(extractImg: image, recLanguage: recLanguage)
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(containerView)
         self.containerView.addSubview(ocrIV)
         self.containerView.addSubview(transButton)
         self.transButton.addTarget(self, action: #selector(clickTransButton(_:)), for: .touchUpInside) // action methd 추가
+        
+        self.ocrIV.image = self.originalImage // 임시
     }
-    
     override func viewDidLayoutSubviews() {
         // 하위 뷰들의 제약 조건
         self.containerView.snp.makeConstraints { make in
@@ -54,20 +70,16 @@ class TextRecognizerView: UIViewController {
             make.centerX.equalToSuperview()
         }
     }
-    init(image: UIImage, recLanguage: String) { // image: , recLanguage: 인식할 언어
-        super.init(nibName: nil, bundle: nil)
-        self.ocrIV.image = image 
-        self.ocrModel = OCRModel(extractImg: image, recLanguage: recLanguage)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 // MARK: - action method, 수정 예정
 extension TextRecognizerView {
-    @objc func clickTransButton(_ sender: Any) { // 번역 버튼 클릭
+    @objc func clickTransButton(_ sender: Any) { // 번역 버튼 클릭 -> 화면 전환
         print("번역 버튼 클릭")
+        let capturetransVC = CaptureImageTransView(
+            image: self.originalImage, recLanguage: self.recognizeLanguage, detectText: "임시 데이터 입니다."
+        )
+        self.navigationController?.pushViewController(capturetransVC, animated: true) // 화면 전환
     }
 }
 
