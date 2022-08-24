@@ -11,6 +11,7 @@ import CropViewController
 
 // MARK: - 카메라로 사진을 찍은 뒤 결과를 보여주는 메소드
 class CapturePhotoViewController: UIViewController {
+    // MARK: - view object
     private lazy var captureIV: UIImageView = { // 찍은 사진을 보여주는 이미지 뷰
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -94,7 +95,7 @@ class CapturePhotoViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        // 제약 조건
+        // MARK: - 제약 조건
         topContainerView.snp.makeConstraints { make in
             make.leading.trailing.top.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalTo(Constants.screenHeight/11)
@@ -118,6 +119,11 @@ class CapturePhotoViewController: UIViewController {
             make.bottom.equalTo(self.view.snp.bottom)
             make.height.equalTo(Constants.screenHeight/11)
         }
+    }
+    private func createLanguageAlert() { // 인식 언어를 선택하지 않은 경우 언어 선택 alert생성
+        let alert = UIAlertController(title: nil, message: Constants.selectLanguageMsg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        self.present(alert, animated: true)
     }
 }
 
@@ -148,13 +154,16 @@ extension CapturePhotoViewController {
         case reCaptureBtn: // 다시 찍기 버튼
             self.navigationController?.popViewController(animated: true)
         case ocrBtn: // 번역 버튼: 이미지와 텍스트를 인식할 언어를 전달
+            guard self.recognizeLanguageButton.title(for: .normal) != Constants.languageButtonTitle else { // 언어를 선택하지 않은 상태
+                self.createLanguageAlert() // alert 생성
+                return
+            }
             let textRecognizerVC = TextRecognizerView(image: self.captureIV.image!, recLanguage: self.recognizeLanguageButton.title(for: .normal)!)
             self.navigationController?.pushViewController(textRecognizerVC, animated: true)
         default:
             fatalError()
         }
     }
-    
 }
 
 // MARK: - Constants
@@ -162,6 +171,7 @@ private enum Constants {
     static let screenWidth = UIScreen.main.bounds.width - 20 // screen width
     static let screenHeight = UIScreen.main.bounds.height // screen height
     static let languageButtonTitle: String = "언어 선택"
+    static let selectLanguageMsg: String = "인식할 언어를 선택해 주세요."
 }
 
 /*
