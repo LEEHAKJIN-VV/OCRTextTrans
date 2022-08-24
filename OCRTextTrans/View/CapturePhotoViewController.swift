@@ -94,8 +94,8 @@ class CapturePhotoViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         // MARK: - 제약 조건
+        super.viewDidLayoutSubviews()
         topContainerView.snp.makeConstraints { make in
             make.leading.trailing.top.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalTo(Constants.screenHeight/11)

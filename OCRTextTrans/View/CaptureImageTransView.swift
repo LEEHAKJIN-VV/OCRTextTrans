@@ -69,8 +69,7 @@ class CaptureImageTransView: UIViewController {
         textview.font = UIFont.preferredFont(forTextStyle: .subheadline) // textview의 font 크기 설정
         textview.adjustsFontForContentSizeCategory = true // text의 dynamic type 설정
         textview.textColor = .black // 글자 색
-        textview.text = StringDescription.TransField.textholder.rawValue // 글자
-        textview.textContainerInset = UIEdgeInsets(top: 32, left: 32, bottom: 32, right: 32) // uitextview의 text 여백 설정
+        textview.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16) // uitextview의 text 여백 설정
         textview.backgroundColor = .gray // 배경색
         textview.isEditable = false // 편집 여부
         return textview
@@ -104,7 +103,7 @@ class CaptureImageTransView: UIViewController {
         textview.adjustsFontForContentSizeCategory = true // text의 dynamic type 설정
         textview.textColor = .black // 글자 색
         textview.text = StringDescription.TransField.textholder.rawValue // 글자
-        textview.textContainerInset = UIEdgeInsets(top: 32, left: 32, bottom: 32, right: 32) // uitextview의 text 여백 설정
+        textview.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16) // uitextview의 text 여백 설정
         textview.backgroundColor = .gray // 배경색
         textview.isEditable = false // 편집 여부
         return textview
@@ -165,7 +164,9 @@ class CaptureImageTransView: UIViewController {
         // 네비게이션 설정
         self.navigationItem.title = "번역 화면"
         self.navigationController?.navigationBar.tintColor = .white
+        // view object 변경
         self.recognizeLanguageButton.setTitle(self.recognitionLanguage, for: .normal)
+        self.originTextView.text = self.detectText
         // 액션메소드 등록
         self.recognizeLanguageButton.addTarget(self, action: #selector(clickLanBtn(_:)), for: .touchUpInside)
         self.languageSwitchButton.addTarget(self, action: #selector(clickLanBtn(_:)), for: .touchUpInside)

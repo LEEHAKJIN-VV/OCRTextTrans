@@ -8,15 +8,18 @@
 import Foundation
 import UIKit
 import SnapKit
+import Combine
 
 // MARK: - 이미지에서 텍스트를 인식한 후 이를 보여주는 뷰 컨트롤러, 텍스트를 추출하는 모델 코드 추가 예정
 class TextRecognizerView: UIViewController {
-    //private var ocrModel: OCRModel? // 이미지에서 텍스트를 추출하는 모델
-    //private var originalImage: UIImage = UIImage() // 기록 저장을 위한 오리지널 이미지
     private var ocrModel: OCRModel // 이미지에서 텍스트를 추출하는 모델
     private var originalImage: UIImage // 기록 저장을 위한 오리지널 이미지
     private var recognizeLanguage: String // 이미지에서 텍스트를 인식할 언어
     
+    private var recgonizeText: String = "" // 이미지에서 인식한 텍스트
+    var disposalbleBag = Set<AnyCancellable>()
+    
+    // MARK: - uiview object
     private lazy var containerView: UIView = { // root view 역할을 하는 컨테이너 뷰
         let view = UIView()
         view.backgroundColor = .black
@@ -51,8 +54,8 @@ class TextRecognizerView: UIViewController {
         self.containerView.addSubview(ocrIV)
         self.containerView.addSubview(transButton)
         self.transButton.addTarget(self, action: #selector(clickTransButton(_:)), for: .touchUpInside) // action methd 추가
-        
         self.ocrIV.image = self.originalImage // 임시
+        self.setbinding() // 바인딩 연결
     }
     override func viewDidLayoutSubviews() {
         // 하위 뷰들의 제약 조건
@@ -71,13 +74,21 @@ class TextRecognizerView: UIViewController {
         }
     }
 }
+// MARK: - combine
+extension TextRecognizerView {
+    private func setbinding() { // binding 연결
+        self.ocrModel.$recognizeText.sink { (updateText: String) in
+            self.recgonizeText = updateText
+        }.store(in: &disposalbleBag)
+    }
+}
 
 // MARK: - action method, 수정 예정
 extension TextRecognizerView {
     @objc func clickTransButton(_ sender: Any) { // 번역 버튼 클릭 -> 화면 전환
         print("번역 버튼 클릭")
         let capturetransVC = CaptureImageTransView(
-            image: self.originalImage, recLanguage: self.recognizeLanguage, detectText: "임시 데이터 입니다."
+            image: self.originalImage, recLanguage: self.recognizeLanguage, detectText: self.recgonizeText
         )
         self.navigationController?.pushViewController(capturetransVC, animated: true) // 화면 전환
     }
