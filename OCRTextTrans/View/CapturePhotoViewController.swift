@@ -66,6 +66,9 @@ class CapturePhotoViewController: UIViewController {
     init(image: UIImage) { // 생성자: 이전 화면에서 찍은 사진을 받음
         super.init(nibName: nil, bundle: nil)
         self.captureIV.image = image
+        // 지금 이미지가 90도 돌아가있으므로 이미지 자체를 90도 임의로 돌려버린다면? -> 일단 크기 문제부터 해결하자
+        let fixedImage = image.fixOrientation()
+        self.captureIV.image = fixedImage
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -91,6 +94,7 @@ class CapturePhotoViewController: UIViewController {
         self.reCaptureBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
         self.cropBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
         self.ocrBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
+        
     }
     
     override func viewDidLayoutSubviews() {

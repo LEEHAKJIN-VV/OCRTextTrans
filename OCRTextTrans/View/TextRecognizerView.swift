@@ -9,14 +9,16 @@ import Foundation
 import UIKit
 import SnapKit
 import Combine
+import SwiftUI
 
-// MARK: - 이미지에서 텍스트를 인식한 후 이를 보여주는 뷰 컨트롤러, 텍스트를 추출하는 모델 코드 추가 예정
+// MARK: - 이미지에서 텍스트를 인식한 후 이를 보여주는 뷰 컨트롤러
 class TextRecognizerView: UIViewController {
-    private var ocrModel: OCRModel // 이미지에서 텍스트를 추출하는 모델
+    private var ocrModel: TextRecognizerViewModel? // 이미지에서 텍스트를 추출하는 모델
     private var originalImage: UIImage // 기록 저장을 위한 오리지널 이미지
     private var recognizeLanguage: String // 이미지에서 텍스트를 인식할 언어
     
-    private var recgonizeText: String = "" // 이미지에서 인식한 텍스트
+    private var recgonizeText: String = "" // 이미지에서 인식한 텍스트 -> 바인딩
+    private var boxLayer: [CAShapeLayer] = [] // 이미지의 텍스트 박스의 layer -> 바인딩
     var disposalbleBag = Set<AnyCancellable>()
     
     // MARK: - uiview object
@@ -41,7 +43,6 @@ class TextRecognizerView: UIViewController {
         // swift 2단계 초기화에 의해 서브 클래스의 프로퍼티 먼저 초기화 후, 슈퍼클래스의 init 호출
         self.originalImage = image
         self.recognizeLanguage = recLanguage
-        self.ocrModel = OCRModel(extractImg: image, recLanguage: recLanguage)
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -54,11 +55,19 @@ class TextRecognizerView: UIViewController {
         self.containerView.addSubview(ocrIV)
         self.containerView.addSubview(transButton)
         self.transButton.addTarget(self, action: #selector(clickTransButton(_:)), for: .touchUpInside) // action methd 추가
-        self.ocrIV.image = self.originalImage // 임시
-        self.setbinding() // 바인딩 연결
+        self.ocrIV.image = self.originalImage
+        self.setConstraints() // 제약 조건 설정
     }
     override func viewDidLayoutSubviews() {
-        // 하위 뷰들의 제약 조건
+        super.viewDidLayoutSubviews()
+        guard !self.ocrIV.frame.isEmpty else { // 이미지 뷰의 프레임을 얻기 위해 이미지뷰의 frame이 결정된 경우 view model 생성
+            return
+        }
+        self.ocrModel = TextRecognizerViewModel(extractImg: self.originalImage, recLanguage: self.recognizeLanguage, viewFrame: self.ocrIV.frame) //지금현재 frame이 0임
+        self.setbinding()
+        self.setTextBoxBinding()
+    }
+    private func setConstraints() { // 제약 조건 설정
         self.containerView.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide)
         }
@@ -76,9 +85,20 @@ class TextRecognizerView: UIViewController {
 }
 // MARK: - combine
 extension TextRecognizerView {
-    private func setbinding() { // binding 연결
-        self.ocrModel.$recognizeText.sink { (updateText: String) in
-            self.recgonizeText = updateText
+    private func setbinding() { // 이미지에서 추출한 텍스트 binding 연결
+        self.ocrModel?.$recognizeText.sink { (updateText: String) in
+            self.recgonizeText = updateText // update
+        }.store(in: &disposalbleBag)
+    }
+    
+    private func setTextBoxBinding() { // 이미지의 box layer binding
+        self.ocrModel?.$boxLayer.sink { (boxLayer: [CAShapeLayer]) in
+            self.boxLayer = boxLayer
+            DispatchQueue.main.async { // main thread에서 작업
+                self.boxLayer.forEach { (layer) in
+                    self.ocrIV.layer.addSublayer(layer)
+                }
+            }
         }.store(in: &disposalbleBag)
     }
 }
@@ -86,7 +106,6 @@ extension TextRecognizerView {
 // MARK: - action method, 수정 예정
 extension TextRecognizerView {
     @objc func clickTransButton(_ sender: Any) { // 번역 버튼 클릭 -> 화면 전환
-        print("번역 버튼 클릭")
         let capturetransVC = CaptureImageTransView(
             image: self.originalImage, recLanguage: self.recognizeLanguage, detectText: self.recgonizeText
         )

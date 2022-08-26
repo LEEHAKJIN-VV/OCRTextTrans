@@ -12,15 +12,14 @@
 		2813AC8628A5317000F646B6 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 2813AC8528A5317000F646B6 /* CropViewController */; };
 		2813AC8828A5317000F646B6 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 2813AC8728A5317000F646B6 /* TOCropViewController */; };
 		2813AC8C28A54D2600F646B6 /* CapturePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2813AC8B28A54D2600F646B6 /* CapturePhotoViewController.swift */; };
-		2842E71E28A78E9B00D5FA2D /* ocr2.HEIC in Resources */ = {isa = PBXBuildFile; fileRef = 2842E71D28A78E9B00D5FA2D /* ocr2.HEIC */; };
 		2850EAD228AFC003007200DB /* SupportLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850EAD128AFC003007200DB /* SupportLanguageViewModel.swift */; };
-		2850EAD428AFD162007200DB /* OCRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850EAD328AFD162007200DB /* OCRModel.swift */; };
+		2850EAD428AFD162007200DB /* TextRecognizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850EAD328AFD162007200DB /* TextRecognizerViewModel.swift */; };
 		2850EAD728AFD930007200DB /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850EAD628AFD930007200DB /* LanguageModel.swift */; };
 		286C520528A2347300212EA4 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C520428A2347300212EA4 /* MainNavigationController.swift */; };
 		286C520828A2488700212EA4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 286C520728A2488700212EA4 /* SnapKit */; };
-		286C520A28A2969F00212EA4 /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C520928A2969F00212EA4 /* RoundView.swift */; };
 		28A87FAB28B3C70C00B054B3 /* LanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A87FAA28B3C70C00B054B3 /* LanguageType.swift */; };
 		28BE51E028B4A416001C5AE4 /* TextRecognizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BE51DF28B4A416001C5AE4 /* TextRecognizerView.swift */; };
+		28C3202728B663030053E7F5 /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C3202628B663030053E7F5 /* UIUtilities.swift */; };
 		28CE231328A7DF5F009FF8AD /* CaptureImageTransView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE231228A7DF5F009FF8AD /* CaptureImageTransView.swift */; };
 		28CE619A28A37AA70038010A /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C520228A2092400212EA4 /* MainPage.swift */; };
 		28CE619E28A3DFE30038010A /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE619D28A3DFE30038010A /* PermissionManager.swift */; };
@@ -39,15 +38,14 @@
 		2813AC8028A4F11500F646B6 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		2813AC8228A51C4F00F646B6 /* StringDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringDescription.swift; sourceTree = "<group>"; };
 		2813AC8B28A54D2600F646B6 /* CapturePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturePhotoViewController.swift; sourceTree = "<group>"; };
-		2842E71D28A78E9B00D5FA2D /* ocr2.HEIC */ = {isa = PBXFileReference; lastKnownFileType = file; path = ocr2.HEIC; sourceTree = "<group>"; };
 		2850EAD128AFC003007200DB /* SupportLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportLanguageViewModel.swift; sourceTree = "<group>"; };
-		2850EAD328AFD162007200DB /* OCRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRModel.swift; sourceTree = "<group>"; };
+		2850EAD328AFD162007200DB /* TextRecognizerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognizerViewModel.swift; sourceTree = "<group>"; };
 		2850EAD628AFD930007200DB /* LanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
 		286C520228A2092400212EA4 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		286C520428A2347300212EA4 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
-		286C520928A2969F00212EA4 /* RoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
 		28A87FAA28B3C70C00B054B3 /* LanguageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageType.swift; sourceTree = "<group>"; };
 		28BE51DF28B4A416001C5AE4 /* TextRecognizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognizerView.swift; sourceTree = "<group>"; };
+		28C3202628B663030053E7F5 /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		28CE231228A7DF5F009FF8AD /* CaptureImageTransView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureImageTransView.swift; sourceTree = "<group>"; };
 		28CE619D28A3DFE30038010A /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		28DDF9CE28AA7D50008A7A2D /* LanguagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerViewController.swift; sourceTree = "<group>"; };
@@ -92,7 +90,6 @@
 			children = (
 				286C520228A2092400212EA4 /* MainPage.swift */,
 				286C520428A2347300212EA4 /* MainNavigationController.swift */,
-				286C520928A2969F00212EA4 /* RoundView.swift */,
 				2813AC8028A4F11500F646B6 /* CameraViewController.swift */,
 				2813AC8B28A54D2600F646B6 /* CapturePhotoViewController.swift */,
 				28CE231228A7DF5F009FF8AD /* CaptureImageTransView.swift */,
@@ -106,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				2850EAD128AFC003007200DB /* SupportLanguageViewModel.swift */,
+				2850EAD328AFD162007200DB /* TextRecognizerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -151,8 +149,7 @@
 				28F279EA289E5AF400D984A5 /* Assets.xcassets */,
 				28F279EC289E5AF400D984A5 /* LaunchScreen.storyboard */,
 				28F279EF289E5AF400D984A5 /* Info.plist */,
-				2842E71D28A78E9B00D5FA2D /* ocr2.HEIC */,
-				2850EAD328AFD162007200DB /* OCRModel.swift */,
+				28C3202628B663030053E7F5 /* UIUtilities.swift */,
 			);
 			path = OCRTextTrans;
 			sourceTree = "<group>";
@@ -246,7 +243,6 @@
 			files = (
 				28F279EE289E5AF400D984A5 /* LaunchScreen.storyboard in Resources */,
 				28F279EB289E5AF400D984A5 /* Assets.xcassets in Resources */,
-				2842E71E28A78E9B00D5FA2D /* ocr2.HEIC in Resources */,
 				28F279E9289E5AF300D984A5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,7 +315,6 @@
 			files = (
 				28CE231328A7DF5F009FF8AD /* CaptureImageTransView.swift in Sources */,
 				286C520528A2347300212EA4 /* MainNavigationController.swift in Sources */,
-				286C520A28A2969F00212EA4 /* RoundView.swift in Sources */,
 				28A87FAB28B3C70C00B054B3 /* LanguageType.swift in Sources */,
 				28F279E6289E5AF300D984A5 /* ViewController.swift in Sources */,
 				2850EAD728AFD930007200DB /* LanguageModel.swift in Sources */,
@@ -329,10 +324,11 @@
 				28DDF9CF28AA7D50008A7A2D /* LanguagePickerViewController.swift in Sources */,
 				28CE619E28A3DFE30038010A /* PermissionManager.swift in Sources */,
 				2813AC8C28A54D2600F646B6 /* CapturePhotoViewController.swift in Sources */,
-				2850EAD428AFD162007200DB /* OCRModel.swift in Sources */,
+				2850EAD428AFD162007200DB /* TextRecognizerViewModel.swift in Sources */,
 				28BE51E028B4A416001C5AE4 /* TextRecognizerView.swift in Sources */,
 				28F279E4289E5AF300D984A5 /* SceneDelegate.swift in Sources */,
 				28CE619A28A37AA70038010A /* MainPage.swift in Sources */,
+				28C3202728B663030053E7F5 /* UIUtilities.swift in Sources */,
 				2813AC8128A4F11500F646B6 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
