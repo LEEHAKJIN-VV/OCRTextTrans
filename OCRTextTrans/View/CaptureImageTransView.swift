@@ -8,11 +8,17 @@
 import Foundation
 import UIKit
 import SnapKit
+import Combine
 
 // 카메로라 찍은 이미지에서 텍스트를 추출하여 번역된 결과를 보여주는 뷰 컨트롤러
 class CaptureImageTransView: UIViewController {
     private var recognitionLanguage: String = "" // 인식한 언어
     private var detectText: String? // 이미지에서 추출한 언어
+    private var viewModel: CaptureImageTransViewModel // view model: 번역 모델
+    
+    var translatedText: String = "" // 번역된 텍스트
+    var disposalbleBag = Set<AnyCancellable>()
+    
     // MARK: - view object
     private lazy var containerView: UIView = { // 번역 화면의 컨테이너 뷰
         let view = UIView()
@@ -102,7 +108,6 @@ class CaptureImageTransView: UIViewController {
         textview.font = UIFont.preferredFont(forTextStyle: .subheadline) // textview의 font 크기 설정
         textview.adjustsFontForContentSizeCategory = true // text의 dynamic type 설정
         textview.textColor = .black // 글자 색
-        textview.text = StringDescription.TransField.textholder.rawValue // 글자
         textview.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16) // uitextview의 text 여백 설정
         textview.backgroundColor = .gray // 배경색
         textview.isEditable = false // 편집 여부
@@ -128,10 +133,13 @@ class CaptureImageTransView: UIViewController {
     }()
     
     init(image: UIImage, recLanguage: String, detectText: String) { // recLanguage: 탐지한 언어, detectText: 탐지된 언어
+        self.viewModel = CaptureImageTransViewModel(text: detectText, sourceLan: recLanguage, targetLan: "한국어") // 기본은 한국어
         super.init(nibName: nil, bundle: nil)
         self.recognitionLanguage = recLanguage // 이미지에서 텍스트를 탐지한 언어
         self.detectText = detectText
+        //self.viewModel = CaptureImageTransViewModel(text: detectText, sourceLan: recLanguage, targetLan: "한국어") // 기본은 한국어
         print("recLanguage: \(recLanguage)")
+        self.setBinding() // 바인딩 연결
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -220,7 +228,20 @@ class CaptureImageTransView: UIViewController {
             make.width.equalToSuperview().dividedBy(9)
         }
     }
+    
 }
+// MARK: - Binding
+extension CaptureImageTransView {
+    private func setBinding() { // 뷰 모델과 바인딩 연결
+        self.viewModel.$translatedText.sink { (updateText: String) in
+            self.translatedText = updateText
+            DispatchQueue.main.async {
+                self.transTextView.text = self.translatedText
+            }
+        }.store(in: &disposalbleBag)
+    }
+}
+
 // MARK: - action method
 extension CaptureImageTransView {
     @objc func clickLanBtn(_ sender: UIButton) { // 언어를 선택하는 버튼

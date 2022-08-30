@@ -30,6 +30,7 @@
 		28F279E9289E5AF300D984A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F279E7289E5AF300D984A5 /* Main.storyboard */; };
 		28F279EB289E5AF400D984A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F279EA289E5AF400D984A5 /* Assets.xcassets */; };
 		28F279EE289E5AF400D984A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F279EC289E5AF400D984A5 /* LaunchScreen.storyboard */; };
+		28F8B94228BDF93300300802 /* CaptureImageTransViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F8B94128BDF93300300802 /* CaptureImageTransViewModel.swift */; };
 		61244294B74C46C75C211D06 /* Pods_OCRTextTrans.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A801DB5ED0A5C930DA2D0D /* Pods_OCRTextTrans.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		28F279EA289E5AF400D984A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28F279ED289E5AF400D984A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28F279EF289E5AF400D984A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28F8B94128BDF93300300802 /* CaptureImageTransViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureImageTransViewModel.swift; sourceTree = "<group>"; };
 		34A801DB5ED0A5C930DA2D0D /* Pods_OCRTextTrans.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OCRTextTrans.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D60A967804DE05B602C3DB /* Pods-OCRTextTrans.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCRTextTrans.release.xcconfig"; path = "Target Support Files/Pods-OCRTextTrans/Pods-OCRTextTrans.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +106,7 @@
 			children = (
 				2850EAD128AFC003007200DB /* SupportLanguageViewModel.swift */,
 				2850EAD328AFD162007200DB /* TextRecognizerViewModel.swift */,
+				28F8B94128BDF93300300802 /* CaptureImageTransViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 			files = (
 				28CE231328A7DF5F009FF8AD /* CaptureImageTransView.swift in Sources */,
 				286C520528A2347300212EA4 /* MainNavigationController.swift in Sources */,
+				28F8B94228BDF93300300802 /* CaptureImageTransViewModel.swift in Sources */,
 				28A87FAB28B3C70C00B054B3 /* LanguageType.swift in Sources */,
 				28F279E6289E5AF300D984A5 /* ViewController.swift in Sources */,
 				2850EAD728AFD930007200DB /* LanguageModel.swift in Sources */,
