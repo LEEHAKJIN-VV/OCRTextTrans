@@ -102,7 +102,7 @@ class CapturePhotoViewController: UIViewController {
         super.viewDidLayoutSubviews()
         topContainerView.snp.makeConstraints { make in
             make.leading.trailing.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalTo(Constants.screenHeight/11)
+            make.height.equalTo(Constants.screenHeight/15)
             make.bottom.equalTo(self.captureIV.snp.top)
         }
         recognizeLanguageButton.snp.makeConstraints { make in
