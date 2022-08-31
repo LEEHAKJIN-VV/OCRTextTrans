@@ -94,6 +94,14 @@ class CaptureImageTransView: UIViewController {
         button.contentVerticalAlignment = .center
         return button
     }()
+    
+    
+    private lazy var translateButton: UIBarButtonItem = { // 번역 버튼
+        let button = UIBarButtonItem(title: "번역하기", style: .plain, target: self, action: #selector(onClickTranslateButton(_:)))
+        button.tintColor = .red
+        return button
+    }()
+    
     private lazy var topEmptyView: UIView = { // top 쓰레기 뷰 -> 복사 버튼을 왼쪽에 배치하기 위해 사용
         let view = UIView()
         return view
@@ -148,6 +156,7 @@ class CaptureImageTransView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.recognizeLanguageButton.setTitle(self.recognitionLanguage, for: .normal) // 인식 언어 버튼의 타이틀을 뷰가 로드된 후 변경
+        self.navigationItem.rightBarButtonItem = self.translateButton
         // container view의 subview 등록
         self.view.addSubview(containerView)
         self.containerView.addSubview(languageStackView)
@@ -256,6 +265,7 @@ extension CaptureImageTransView {
         case recognizeLanguageButton:
             alert.addAction(UIAlertAction(title: "선택", style: .default) { (_) in
                 self.recognizeLanguageButton.setTitle(languageVC.currentLanguage, for: .normal)
+                //self.viewModel.handleDownloadDeleteModel(sourceLan: languageVC.currentLanguage, targetLan: self.translateLanguageButton.title(for: .normal)!)
             })
             self.present(alert, animated: true) // 언어 선택 pickerview 호출
         case translateLanguageButton:
@@ -271,6 +281,16 @@ extension CaptureImageTransView {
             fatalError()
         }
     }
+    @objc func onClickTranslateButton(_ sender: Any) { // 번역하기 버튼
+        print("오른쪽 버튼 클릭")
+        let soureLanguage: String = self.recognizeLanguageButton.title(for: .normal)!
+        let targetLanguage: String = self.translateLanguageButton.title(for: .normal)!
+        // 여기를 바꿔야할듯
+        self.viewModel.handleDownloadDeleteModel(text:self.originTextView.text  ,sourceLan: soureLanguage, targetLan: targetLanguage) // 번역하기 버튼 클릭 -> 뷰 바인딩을 통한
+        print("번역하기전 언어: \(soureLanguage)")
+        print("번역된 후 언어: \(targetLanguage)")
+    }
+    
     @objc func clickCopyBtn(_ sender: UIButton) { // 현재 텍스트를 클립보드에 저장하는 버튼
         switch sender { // 클립보드에 현재 텍스트뷰의 텍스트 내용 저장
         case originCopyButton:

@@ -7,8 +7,6 @@
 
 import Foundation
 import MLKitTranslate
-import SwiftUI
-
 
 // MARK: - 언어 모델
 // LanguageModel 리팩토링 필요
@@ -43,8 +41,9 @@ struct LanguageModel {
             //fatalError()
         }
     }
-    func getTranslateType(language: String) -> TranslateLanguage { // 번역 언어 인식 타입 반환
-        switch language {
+    
+    static func getTranslateType(inputIanguage: String) -> TranslateLanguage { // 번역 언어 인식 타입 반환
+        switch inputIanguage {
         case "영어":
             return .english
         case "한국어":
