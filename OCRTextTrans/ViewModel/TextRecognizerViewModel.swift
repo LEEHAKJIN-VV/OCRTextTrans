@@ -14,7 +14,6 @@ import Combine
 class TextRecognizerViewModel {
     private var ocrImage: UIImage // 텍스트를 추출할 이미지
     private var recognitionLanguage: String? // 이미지에서 인식할 글자
-    private var languageModel: LanguageModel = LanguageModel() // 언어 모델
     private var languagetype: LanguageType // 언어의 region type
     
     @Published var recognizeText: String = "" // 이미지에서 인식한 텍스트
@@ -25,7 +24,7 @@ class TextRecognizerViewModel {
     init(extractImg: UIImage, recLanguage: String, viewFrame: CGRect) { // 생성자 viewFrame: box layer를 그리기 위해 필요
         self.viewFrame = viewFrame
         self.ocrImage = extractImg
-        self.languagetype = languageModel.getLanguageRegion(language: recLanguage) // 인식해야할 언어 타입을 확인
+        self.languagetype = LanguageModel.getLanguageRegion(language: recLanguage)
         self.startOCR()
     }
     func startOCR() { // Start OCR

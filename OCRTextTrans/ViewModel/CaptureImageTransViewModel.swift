@@ -14,13 +14,14 @@ class CaptureImageTransViewModel {
     private var language: String = "한국어" // 현재 언어
     private var translator: Translator! // 번역기
     @Published var translatedText: String = "" // 번역된 텍스트
-    
+
     init(text: String, sourceLan: String, targetLan: String) { // 생성자
         self.createOptions(text: text, sourceLanguage: sourceLan, targetLanguage: targetLan)
     }
     private func createOptions(text: String, sourceLanguage: String, targetLanguage: String) { // options 생성
         let sourceLanguageType: TranslateLanguage = LanguageModel.getTranslateType(inputIanguage: sourceLanguage)
         let targetLanguageType: TranslateLanguage = LanguageModel.getTranslateType(inputIanguage: targetLanguage)
+        
         let options = TranslatorOptions(sourceLanguage: sourceLanguageType, targetLanguage: targetLanguageType)
         
         self.translator = Translator.translator(options: options) // 번역기 업데이트
@@ -52,11 +53,12 @@ class CaptureImageTransViewModel {
     }
     
     func handleDownloadDeleteModel(text: String, sourceLan: String, targetLan: String) { // 모델의 다운로드와 삭제를 담당하는 함수
-        let language = LanguageModel.getTranslateType(inputIanguage: targetLan)
+        let language: TranslateLanguage = LanguageModel.getTranslateType(inputIanguage: targetLan)
         
         let model = self.model(forLanguage: language)
         let modelManager = ModelManager.modelManager()
-        let languageName = Locale.current.localizedString(forLanguageCode: language.rawValue)!
+        let languageName = Locale.current.localizedString(forLanguageCode: language.rawValue)! // "한국어" -> Korean "중국어" -> Chinese
+        print("languageName: \(languageName)")
         
         if modelManager.isModelDownloaded(model) { // model이 존재하는 경우 delete
             print("Deleting \(languageName)")

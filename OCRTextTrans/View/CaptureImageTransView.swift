@@ -265,7 +265,6 @@ extension CaptureImageTransView {
         case recognizeLanguageButton:
             alert.addAction(UIAlertAction(title: "선택", style: .default) { (_) in
                 self.recognizeLanguageButton.setTitle(languageVC.currentLanguage, for: .normal)
-                //self.viewModel.handleDownloadDeleteModel(sourceLan: languageVC.currentLanguage, targetLan: self.translateLanguageButton.title(for: .normal)!)
             })
             self.present(alert, animated: true) // 언어 선택 pickerview 호출
         case translateLanguageButton:
@@ -287,8 +286,6 @@ extension CaptureImageTransView {
         let targetLanguage: String = self.translateLanguageButton.title(for: .normal)!
         // 여기를 바꿔야할듯
         self.viewModel.handleDownloadDeleteModel(text:self.originTextView.text  ,sourceLan: soureLanguage, targetLan: targetLanguage) // 번역하기 버튼 클릭 -> 뷰 바인딩을 통한
-        print("번역하기전 언어: \(soureLanguage)")
-        print("번역된 후 언어: \(targetLanguage)")
     }
     
     @objc func clickCopyBtn(_ sender: UIButton) { // 현재 텍스트를 클립보드에 저장하는 버튼
