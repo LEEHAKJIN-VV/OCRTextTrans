@@ -19,7 +19,7 @@ class CapturePhotoViewController: UIViewController {
     }()
     private lazy var topContainerView: UIView = { // 상단 뷰
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = Constants.containerColor
         return view
     }()
     
@@ -36,7 +36,7 @@ class CapturePhotoViewController: UIViewController {
     }()
     private lazy var bottomContainerView: UIView = { // 하단 뷰
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = Constants.containerColor
         return view
     }()
     
@@ -44,7 +44,7 @@ class CapturePhotoViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalCentering
-        stackView.backgroundColor = .lightGray
+        stackView.backgroundColor = Constants.containerColor
         return stackView
     }()
     private lazy var cropBtn: UIButton = { // 자르기 버튼
@@ -66,7 +66,7 @@ class CapturePhotoViewController: UIViewController {
     init(image: UIImage) { // 생성자: 이전 화면에서 찍은 사진을 받음
         super.init(nibName: nil, bundle: nil)
         self.captureIV.image = image
-        // 지금 이미지가 90도 돌아가있으므로 이미지 자체를 90도 임의로 돌려버린다면? -> 일단 크기 문제부터 해결하자
+        
         let fixedImage = image.fixOrientation()
         self.captureIV.image = fixedImage
     }
@@ -76,8 +76,8 @@ class CapturePhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // root view
-        self.view.backgroundColor = .black
+        self.navigationController?.navigationBar.tintColor = Constants.barTintColor // 네비게이션 바 색상 
+        
         self.view.addSubview(captureIV)
         self.view.addSubview(topContainerView)
         self.view.addSubview(bottomContainerView)
@@ -88,7 +88,7 @@ class CapturePhotoViewController: UIViewController {
         self.bottomStackView.addArrangedSubview(reCaptureBtn)
         self.bottomStackView.addArrangedSubview(ocrBtn)
         self.bottomContainerView.addSubview(bottomStackView)
-        self.navigationItem.title = "사진"
+        self.navigationItem.title = Constants.screenTitle
         // attach action method
         self.recognizeLanguageButton.addTarget(self, action: #selector(topBtnclick(_:)), for: .touchUpInside)
         self.reCaptureBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
@@ -170,14 +170,6 @@ extension CapturePhotoViewController {
     }
 }
 
-// MARK: - Constants
-private enum Constants {
-    static let screenWidth = UIScreen.main.bounds.width - 20 // screen width
-    static let screenHeight = UIScreen.main.bounds.height // screen height
-    static let languageButtonTitle: String = "언어 선택"
-    static let selectLanguageMsg: String = "인식할 언어를 선택해 주세요."
-}
-
 /*
 MARK: - TOCropViewController 패키지의 CropViewControllerDelegate 프로토콜 구현
  아래 두 메소드는 이미지를 crop하거나 crop을 취소한 경우 호출되는 delegate method
@@ -192,6 +184,17 @@ extension CapturePhotoViewController: CropViewControllerDelegate {
     func cropViewController(_ cropViewController: CropViewController, didFinishCancelled cancelled: Bool) {
         self.dismiss(animated: false)
     }
+}
+
+// MARK: - Constants
+private enum Constants {
+    static let screenWidth: CGFloat = UIScreen.main.bounds.width - 20 // screen width
+    static let screenHeight: CGFloat = UIScreen.main.bounds.height // screen height
+    static let screenTitle: String = "사진"
+    static let languageButtonTitle: String = "언어 선택"
+    static let selectLanguageMsg: String = "인식할 언어를 선택해 주세요."
+    static let containerColor: UIColor = .lightGray
+    static let barTintColor: UIColor = .white
 }
 
 // MARK: - Swift UI preview

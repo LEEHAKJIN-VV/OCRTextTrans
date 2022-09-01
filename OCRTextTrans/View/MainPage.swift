@@ -16,18 +16,17 @@ enum CategoryKind: Int{
 
 // MARK: - MainPage
 final class MainPage: UIViewController {
-    // 루트 뷰의 서브 뷰인 컨테이너 뷰
-    private var containerView: UIView = {
+    private lazy var containerView: UIView = { // 루트 뷰의 서브 뷰인 컨테이너 뷰
         let view = UIView()
-        view.backgroundColor = .yellow
+        view.backgroundColor = Constants.backgroundColor
         return view
     }()
-    // 카테고리 스택 뷰
-    private var categoryStackView: UIStackView = {
+    
+    private lazy var categoryStackView: UIStackView = { // 카테고리 스택 뷰
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.backgroundColor = .yellow
+        stackView.backgroundColor = Constants.backgroundColor
         return stackView
     }()
     
@@ -45,16 +44,53 @@ final class MainPage: UIViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.bottom.equalTo(self.view)
         }
-
         self.categoryStackView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(self.containerView).inset(100)
             make.bottom.top.equalTo(self.containerView).inset(100)
         }
-        categoryStackView.spacing = 32 // spacing은 스택뷰의 서브 뷰들이 배치되고 나서 호출
+        self.categoryStackView.spacing = 32 // spacing은 스택뷰의 서브 뷰들이 배치되고 나서 호출
     }
-    // category 선택 액션 메소드
-    @objc func tapSelectImage(_ sender: UITapGestureRecognizer) {
-        switch sender.view?.tag {
+    
+    private func setNavigationBarAppear() { // navigation bar apperacnee설정
+        self.navigationItem.title = Constants.screenTitle // 타이틀 설정
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+        navigationItem.compactAppearance = appearance // For iPhone small navigation bar in landscape.
+    }
+    
+    private func setCategory() { // set category
+        self.createCategoryImage(mode: CategoryKind.camera)
+        self.createCategoryImage(mode: CategoryKind.album)
+        self.createCategoryImage(mode: CategoryKind.record)
+    }
+    // Create select image location: 1. camera, 2. album 3. history
+    private func createCategoryImage(mode: CategoryKind) {
+        let categoryButton = UIButton()
+        categoryButton.tintColor = Constants.iconColor
+        categoryButton.tag = mode.rawValue
+        // 버튼 이미지 최대
+        categoryButton.contentHorizontalAlignment = .fill
+        categoryButton.contentVerticalAlignment = .fill
+        self.categoryStackView.addArrangedSubview(categoryButton) // 스택뷰에 버튼 추가
+        
+        categoryButton.addTarget(self, action: #selector(tapSelectImage(_:)), for: .touchUpInside) // 액션메소드 추가
+        switch mode { // 버튼 이미지 설정
+        case .camera:
+            categoryButton.setImage(UIImage(systemName: Constants.cameraIconName), for: .normal)
+        case .album:
+            categoryButton.setImage(UIImage(systemName: Constants.albumIconName), for: .normal)
+        case .record:
+            categoryButton.setImage(UIImage(systemName: Constants.recordIconName), for: .normal)
+        }
+    }
+}
+// MARK: - action method
+extension MainPage {
+    @objc func tapSelectImage(_ sender: UIButton) { // category 선택 액션 메소드
+        switch sender.tag {
         case 0:
             print("카메라 클릭")
             self.navigationController?.pushViewController(CameraViewController(), animated: true)
@@ -62,52 +98,22 @@ final class MainPage: UIViewController {
             print("앨범 클릭")
         case 2:
             print("번역 기록 클릭")
-        default:
-            // nothing
+        default: // nothing
             break
         }
     }
+}
+
+// MARK: - Constants
+private enum Constants {
+    static let cameraIconName: String = "camera.fill"
+    static let albumIconName: String = "photo.fill"
+    static let recordIconName: String = "doc.text.image"
+    static let screenTitle: String = "사진 번역"
     
-    // navigation bar apperacnee설정
-    private func setNavigationBarAppear() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .systemRed
-        
-        navigationItem.standardAppearance = appearance
-        navigationItem.scrollEdgeAppearance = appearance
-        navigationItem.compactAppearance = appearance // For iPhone small navigation bar in landscape.
-        self.navigationItem.title = "사진 번역" // 타이틀 설정
-    }
-    
-    // set category
-    private func setCategory() {
-        createCategoryImage(mode: CategoryKind.camera, bgColor: .white)
-        createCategoryImage(mode: CategoryKind.album, bgColor: .white)
-        createCategoryImage(mode: CategoryKind.record, bgColor: .white)
-    }
-    // Create select image location: 1. camera, 2. album 3. history
-    private func createCategoryImage(mode: CategoryKind, bgColor: UIColor) {
-        // 이미지 뷰
-        let categoryIV = UIImageView()
-        categoryIV.backgroundColor = bgColor
-        categoryIV.tag = mode.rawValue
-        categoryIV.isUserInteractionEnabled = true
-        categoryStackView.addArrangedSubview(categoryIV) // 스택뷰의 서브 뷰로 이미지 뷰 추가
-        
-        // create tapGesture
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(tapSelectImage(_:)))
-        categoryIV.addGestureRecognizer(tapGestureRecognizer) // enroll tap gesture
-        // 카테고리의 이미지 설정
-        switch mode {
-        case .camera:
-            categoryIV.image = UIImage(systemName: "camera.fill")
-        case .album:
-            categoryIV.image = UIImage(systemName: "photo.fill")
-        case .record:
-            categoryIV.image = UIImage(systemName: "doc.text.image")
-        }
-    }
+    static let backgroundColor: UIColor = .lightGray
+    static let iconColor: UIColor = .white
+    static let bartintColor: UIColor = .white
 }
 
 // MARK: - Swift UI preview

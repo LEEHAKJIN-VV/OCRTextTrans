@@ -187,7 +187,7 @@ class CaptureImageTransView: UIViewController {
         self.transOptionStackview.addArrangedSubview(transCopyButton)
         self.transOptionStackview.addArrangedSubview(bottomEmptyView)
         // 네비게이션 설정
-        self.navigationItem.title = "번역 화면"
+        self.navigationItem.title = Constants.screenTitle
         self.navigationController?.navigationBar.tintColor = .white
         // view object 변경
         self.recognizeLanguageButton.setTitle(self.recognitionLanguage, for: .normal)
@@ -337,6 +337,7 @@ private enum Constants {
     static let textStackViewHeight: CGFloat = UIScreen.main.bounds.height * 0.8
     static let contaierViewHeight: CGFloat = UIScreen.main.bounds.height * 0.4
     static let initTransLanguage: String = "한국어"
+    static let screenTitle: String = "번역 결과"
 }
 
 

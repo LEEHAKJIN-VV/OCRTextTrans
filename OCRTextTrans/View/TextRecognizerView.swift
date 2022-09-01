@@ -35,7 +35,7 @@ class TextRecognizerView: UIViewController {
     private lazy var transButton: UIButton = { // 추출한 텍스트를 번역하는 버튼
         let button = UIButton()
         button.setTitle("번역", for: .normal)
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = Constants.buttonColor
         return button
     }()
     
@@ -51,6 +51,8 @@ class TextRecognizerView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = Constants.screenTitle
+        
         self.view.addSubview(containerView)
         self.containerView.addSubview(ocrIV)
         self.containerView.addSubview(transButton)
@@ -116,5 +118,7 @@ extension TextRecognizerView {
 // MARK: - Constants
 private enum Constants {
     static let imageViewHeight: CGFloat = UIScreen.main.bounds.height * 0.75
+    static let buttonColor: UIColor = .lightGray
+    static let screenTitle: String = "텍스트 인식"
 }
 

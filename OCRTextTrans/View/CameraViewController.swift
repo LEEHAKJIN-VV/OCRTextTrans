@@ -15,6 +15,7 @@ class CameraViewController: UIViewController {
     var session: AVCaptureSession?
     let output = AVCapturePhotoOutput()
     let previewLayer = AVCaptureVideoPreviewLayer()
+    
     private var permissionManager = PermissionManager() // 권한 매니저
     // camera view -> 사진을 찍을 화면을 보여주는 뷰
     private lazy var cameraFrameView: UIView = {
@@ -23,8 +24,7 @@ class CameraViewController: UIViewController {
         return view
     }()
     
-    // bottom container view
-    private lazy var bottomContainerView: UIView = {
+    private lazy var bottomContainerView: UIView = { // bottom container view
         let view = UIView()
         view.backgroundColor = .black
         return view
@@ -35,9 +35,7 @@ class CameraViewController: UIViewController {
         view.backgroundColor = .black
         return view
     }()
-    
-    // 캡처 버튼
-    private lazy var captureButton: UIButton = {
+    private lazy var captureButton: UIButton = { // 캡처 버튼
         let button = UIButton()
         button.layer.cornerRadius = 40
         button.layer.borderWidth = 7
@@ -47,6 +45,10 @@ class CameraViewController: UIViewController {
     
     override func viewDidLoad() {
         print("viewDidLoad call")
+        // set navgationbar
+        self.navigationItem.title = Constants.screenTitle
+        self.navigationController?.navigationBar.tintColor = Constants.bartintColor
+        
         self.cameraFrameView.layer.addSublayer(previewLayer)
         self.bottomContainerView.addSubview(self.captureButton)
         self.view.addSubview(topContainerView)
@@ -54,9 +56,7 @@ class CameraViewController: UIViewController {
         self.view.addSubview(cameraFrameView)
         
         self.startCamera() // 카메라 기능 시작
-        captureButton.addTarget(self, action: #selector(didTapTakePhoto), for: .touchUpInside) // action method 등록
-        self.navigationItem.title = "테스트"
-        //self.navigationItem.hidesBackButton = true
+        self.captureButton.addTarget(self, action: #selector(didTapTakePhoto), for: .touchUpInside) // action method 등록
     }
     // 뷰가 나타낼때 session 시작
     override func viewWillAppear(_ animated: Bool) {
@@ -76,20 +76,17 @@ class CameraViewController: UIViewController {
             make.bottom.equalTo(self.bottomContainerView.snp.top)
             make.leading.trailing.equalToSuperview()
         }
-        
         topContainerView.snp.makeConstraints { make in
             make.height.equalTo(100)
             make.top.equalTo(self.view.snp.top)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.cameraFrameView.snp.top)
         }
-        
         bottomContainerView.snp.makeConstraints { make in
             make.height.equalTo(150)
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
         }
-        
         captureButton.snp.makeConstraints { make in
             make.width.height.equalTo(80)
             make.center.equalToSuperview()
@@ -101,26 +98,18 @@ class CameraViewController: UIViewController {
         self.session?.stopRunning() // 카메라 session을 멈춤
         self.captureViewController = nil // capturephoto 프로퍼티를 nil로 초기화
     }
-    // 촬영 버튼 액션 메소드
-    @objc private func didTapTakePhoto() {
-        output.capturePhoto(with: AVCapturePhotoSettings(), delegate: self) // 사진을 캡처하는 메소드
-    }
     
-    // 카메라 시작
-    func startCamera() {
+    private func startCamera() { // 카메라 시작
         // 카메라 접근 권한을 확인 true면 승인 false면 승인이 안된 상태이므로 카메라 승인을 요청해야 함
         Task {
             let requestStatus: PermissionManager.CameraPermission = await permissionManager.getCameraAuthorizationStatus()
             switch requestStatus {
             case .authorize:
                 self.setUpcamera()
-                break
             case .deny:
                 self.cameraDenied() // 카메라 권한이 거부된 경우
-                break
             default:
                 self.navigationController?.popViewController(animated: false)
-                break
             }
         }
     }
@@ -176,6 +165,12 @@ class CameraViewController: UIViewController {
         }
     }
 }
+// MARK: - action method
+extension CameraViewController {
+    @objc private func didTapTakePhoto() { // 촬영 버튼 액션 메소드
+        self.output.capturePhoto(with: AVCapturePhotoSettings(), delegate: self) // 사진을 캡처하는 메소드
+    }
+}
 
 // MARK: - 사진을 캡처했을 때 결과를 알리는 protocol
 extension CameraViewController: AVCapturePhotoCaptureDelegate {
@@ -194,6 +189,12 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
         captureViewController?.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(captureViewController!, animated: true)
     }
+}
+
+// MARK: - Constants
+private enum Constants {
+    static let screenTitle: String = "사진 촬영"
+    static let bartintColor: UIColor = .white
 }
 
 // MARK: - Swift UI preview
