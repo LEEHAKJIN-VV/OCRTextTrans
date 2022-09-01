@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import Combine
+import NVActivityIndicatorView
 
 // 카메로라 찍은 이미지에서 텍스트를 추출하여 번역된 결과를 보여주는 뷰 컨트롤러
 class CaptureImageTransView: UIViewController {
@@ -140,6 +141,13 @@ class CaptureImageTransView: UIViewController {
         return view
     }()
     
+    lazy var activityIndicator: NVActivityIndicatorView = { // loading indicator
+        let indicator = NVActivityIndicatorView(frame: .zero)
+        indicator.type = .ballSpinFadeLoader
+        indicator.color = .lightGray
+        return indicator
+    }()
+    
     init(image: UIImage, recLanguage: String, detectText: String) { // recLanguage: 탐지한 언어, detectText: 탐지된 언어
         self.viewModel = CaptureImageTransViewModel(text: detectText, sourceLan: recLanguage, targetLan: "한국어") // 기본은 한국어
         super.init(nibName: nil, bundle: nil)
@@ -246,8 +254,30 @@ extension CaptureImageTransView {
             self.translatedText = updateText
             DispatchQueue.main.async {
                 self.transTextView.text = self.translatedText
+                self.endLoadingAnimation() // 로딩 애니메이션 종료
             }
         }.store(in: &disposalbleBag)
+    }
+}
+// MARK: - Loading
+/// 제일 처음이나 번역하기 버튼을 누르면
+/// 로딩뷰를 띄우고 번역이 완료됐다는 알림이 오면 그때 로딩뷰를 없앰
+/// 그냥 로딩뷰를 제일 맨위에 보여주고 완료되면 제거하면 내용이 보일듯
+extension CaptureImageTransView {
+    private func startLoadingAnimation() { // 애니메이션 시작
+        DispatchQueue.main.async {
+            self.transTextView.text = "" // 번역 텍스트 뷰 빈화면으로 만듬
+        }
+        self.bottomContainerView.addSubview(activityIndicator) // 하단 컨테이너 뷰의 subview로 등록
+        self.activityIndicator.snp.makeConstraints { make in // 제약 조건
+            make.center.equalToSuperview()
+            make.width.height.equalTo(Constants.screenWidth/5)
+        }
+        
+        self.activityIndicator.startAnimating() // 애니메이션 시작
+    }
+    private func endLoadingAnimation() { // 애니메이션 종료
+        self.activityIndicator.stopAnimating()
     }
 }
 
@@ -281,11 +311,11 @@ extension CaptureImageTransView {
         }
     }
     @objc func onClickTranslateButton(_ sender: Any) { // 번역하기 버튼
-        print("오른쪽 버튼 클릭")
-        let soureLanguage: String = self.recognizeLanguageButton.title(for: .normal)!
-        let targetLanguage: String = self.translateLanguageButton.title(for: .normal)!
-        // 여기를 바꿔야할듯
-        self.viewModel.handleDownloadDeleteModel(text:self.originTextView.text  ,sourceLan: soureLanguage, targetLan: targetLanguage) // 번역하기 버튼 클릭 -> 뷰 바인딩을 통한
+        let soureLanguage: String = self.recognizeLanguageButton.title(for: .normal)! // 번역하기 전 언어
+        let targetLanguage: String = self.translateLanguageButton.title(for: .normal)! // 번역한 후 언어
+        
+        self.startLoadingAnimation() // 로딩 애니메이션 시작
+        self.viewModel.handleDownloadDeleteModel(text:self.originTextView.text, sourceLan: soureLanguage, targetLan: targetLanguage) // 번역하기 버튼 클릭 -> 뷰 바인딩을 통한
     }
     
     @objc func clickCopyBtn(_ sender: UIButton) { // 현재 텍스트를 클립보드에 저장하는 버튼
