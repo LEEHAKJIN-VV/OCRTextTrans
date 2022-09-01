@@ -12,6 +12,7 @@
 		2813AC8628A5317000F646B6 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 2813AC8528A5317000F646B6 /* CropViewController */; };
 		2813AC8828A5317000F646B6 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 2813AC8728A5317000F646B6 /* TOCropViewController */; };
 		2813AC8C28A54D2600F646B6 /* CapturePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2813AC8B28A54D2600F646B6 /* CapturePhotoViewController.swift */; };
+		28352D5C28C0553A00174611 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 28352D5B28C0553A00174611 /* NVActivityIndicatorView */; };
 		2850EAD228AFC003007200DB /* SupportLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850EAD128AFC003007200DB /* SupportLanguageViewModel.swift */; };
 		2850EAD428AFD162007200DB /* TextRecognizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850EAD328AFD162007200DB /* TextRecognizerViewModel.swift */; };
 		2850EAD728AFD930007200DB /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850EAD628AFD930007200DB /* LanguageModel.swift */; };
@@ -69,6 +70,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				286C520828A2488700212EA4 /* SnapKit in Frameworks */,
+				28352D5C28C0553A00174611 /* NVActivityIndicatorView in Frameworks */,
 				2813AC8828A5317000F646B6 /* TOCropViewController in Frameworks */,
 				2813AC8628A5317000F646B6 /* CropViewController in Frameworks */,
 				61244294B74C46C75C211D06 /* Pods_OCRTextTrans.framework in Frameworks */,
@@ -197,6 +199,7 @@
 				286C520728A2488700212EA4 /* SnapKit */,
 				2813AC8528A5317000F646B6 /* CropViewController */,
 				2813AC8728A5317000F646B6 /* TOCropViewController */,
+				28352D5B28C0553A00174611 /* NVActivityIndicatorView */,
 			);
 			productName = OCRTextTrans;
 			productReference = 28F279DE289E5AF300D984A5 /* OCRTextTrans.app */;
@@ -229,6 +232,7 @@
 			packageReferences = (
 				286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
+				28352D5A28C0553A00174611 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 			);
 			productRefGroup = 28F279DF289E5AF300D984A5 /* Products */;
 			projectDirPath = "";
@@ -567,6 +571,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		28352D5A28C0553A00174611 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -587,6 +599,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
 			productName = TOCropViewController;
+		};
+		28352D5B28C0553A00174611 /* NVActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28352D5A28C0553A00174611 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorView;
 		};
 		286C520728A2488700212EA4 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
