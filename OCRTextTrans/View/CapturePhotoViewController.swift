@@ -54,7 +54,7 @@ class CapturePhotoViewController: UIViewController {
     }()
     private lazy var reCaptureBtn: UIButton = { // 다시 찍기 버튼
         let button = UIButton()
-        button.setTitle("다시 찍기", for: .normal)
+        button.setTitle("다시 선택", for: .normal)
         return button
     }()
     private lazy var ocrBtn: UIButton = { // 번역 버튼

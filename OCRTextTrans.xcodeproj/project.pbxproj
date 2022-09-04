@@ -17,6 +17,7 @@
 		2850EAD728AFD930007200DB /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850EAD628AFD930007200DB /* LanguageModel.swift */; };
 		286C520528A2347300212EA4 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C520428A2347300212EA4 /* MainNavigationController.swift */; };
 		286C520828A2488700212EA4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 286C520728A2488700212EA4 /* SnapKit */; };
+		2887004C28C4A4C400DB9749 /* PhotoSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2887004B28C4A4C400DB9749 /* PhotoSelectViewController.swift */; };
 		28A87FAB28B3C70C00B054B3 /* LanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A87FAA28B3C70C00B054B3 /* LanguageType.swift */; };
 		28BE51E028B4A416001C5AE4 /* TextRecognizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BE51DF28B4A416001C5AE4 /* TextRecognizerView.swift */; };
 		28C3202728B663030053E7F5 /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C3202628B663030053E7F5 /* UIUtilities.swift */; };
@@ -43,6 +44,7 @@
 		2850EAD628AFD930007200DB /* LanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
 		286C520228A2092400212EA4 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		286C520428A2347300212EA4 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		2887004B28C4A4C400DB9749 /* PhotoSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectViewController.swift; sourceTree = "<group>"; };
 		28A87FAA28B3C70C00B054B3 /* LanguageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageType.swift; sourceTree = "<group>"; };
 		28BE51DF28B4A416001C5AE4 /* TextRecognizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognizerView.swift; sourceTree = "<group>"; };
 		28C3202628B663030053E7F5 /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				28CE231228A7DF5F009FF8AD /* CaptureImageTransView.swift */,
 				28DDF9CE28AA7D50008A7A2D /* LanguagePickerViewController.swift */,
 				28BE51DF28B4A416001C5AE4 /* TextRecognizerView.swift */,
+				2887004B28C4A4C400DB9749 /* PhotoSelectViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				28F8B94228BDF93300300802 /* CaptureImageTransViewModel.swift in Sources */,
 				28A87FAB28B3C70C00B054B3 /* LanguageType.swift in Sources */,
 				28F279E6289E5AF300D984A5 /* ViewController.swift in Sources */,
+				2887004C28C4A4C400DB9749 /* PhotoSelectViewController.swift in Sources */,
 				2850EAD728AFD930007200DB /* LanguageModel.swift in Sources */,
 				2850EAD228AFC003007200DB /* SupportLanguageViewModel.swift in Sources */,
 				28F279E2289E5AF300D984A5 /* AppDelegate.swift in Sources */,
@@ -409,7 +413,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -463,7 +467,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -490,7 +494,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -521,7 +525,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
