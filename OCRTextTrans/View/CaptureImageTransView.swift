@@ -245,7 +245,6 @@ class CaptureImageTransView: UIViewController {
             make.width.equalToSuperview().dividedBy(9)
         }
     }
-    
 }
 // MARK: - Binding
 extension CaptureImageTransView {
@@ -273,7 +272,6 @@ extension CaptureImageTransView {
             make.center.equalToSuperview()
             make.width.height.equalTo(Constants.screenWidth/5)
         }
-        
         self.activityIndicator.startAnimating() // 애니메이션 시작
     }
     private func endLoadingAnimation() { // 애니메이션 종료
@@ -319,6 +317,7 @@ extension CaptureImageTransView {
     }
     
     @objc func clickCopyBtn(_ sender: UIButton) { // 현재 텍스트를 클립보드에 저장하는 버튼
+        self.showCopyToast() // toast message 출력
         switch sender { // 클립보드에 현재 텍스트뷰의 텍스트 내용 저장
         case originCopyButton:
             UIPasteboard.general.string = self.originTextView.text
@@ -327,6 +326,28 @@ extension CaptureImageTransView {
         default:
             return
         }
+    }
+    private func showCopyToast() { // 토스트 메시지를 띄우는 함수
+        let toastLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.tintColor = Constants.toastTextColor
+        toastLabel.text = Constants.copyMsg
+        toastLabel.font = UIFont.systemFont(ofSize: 14)
+        toastLabel.textAlignment = .center
+        toastLabel.layer.cornerRadius = 8
+        toastLabel.clipsToBounds = true
+        
+        self.originOptionStackview.addSubview(toastLabel)
+        
+        toastLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        UIView.animate(withDuration: 1.5, delay: 1.5, options: .curveEaseOut, animations: { // 애니메이션
+            toastLabel.alpha = 0.0
+        }, completion: { (completed) in
+            toastLabel.removeFromSuperview()
+        })
     }
 }
 
@@ -338,6 +359,10 @@ private enum Constants {
     static let contaierViewHeight: CGFloat = UIScreen.main.bounds.height * 0.4
     static let initTransLanguage: String = "한국어"
     static let screenTitle: String = "번역 결과"
+    static let copyMsg: String = "텍스트가 복사 되었습니다."
+    
+    static let toastBackgroundColor: UIColor = .black
+    static let toastTextColor: UIColor = .white
 }
 
 

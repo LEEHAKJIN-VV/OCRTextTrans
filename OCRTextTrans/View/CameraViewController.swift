@@ -140,8 +140,8 @@ class CameraViewController: UIViewController {
     }
     private func cameraDenied() { // 카메라 권한이 거부된 경우 Alert를 생성하여 카메라 권한 설정 요청
         // alert 생성
-        let alert = UIAlertController(title: StringDescription.CamPermission.title.rawValue,
-                                      message:StringDescription.CamPermission.content.rawValue,
+        let alert = UIAlertController(title: Constants.alertTitle,
+                                      message:Constants.alertContent,
                                       preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: "취소", style: .cancel) { (_) in // 카메라 권한 승인을 취소한 경우 뒤로가기
@@ -194,6 +194,8 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
 // MARK: - Constants
 private enum Constants {
     static let screenTitle: String = "사진 촬영"
+    static let alertTitle = "카메라 접근이 거부되었습니다."
+    static let alertContent = "카메라 사용을 원하시는 경우, 설정에서 카메라의 권한을 승인해주세요."
     static let bartintColor: UIColor = .white
 }
 

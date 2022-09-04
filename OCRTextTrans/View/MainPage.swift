@@ -96,6 +96,7 @@ extension MainPage {
             self.navigationController?.pushViewController(CameraViewController(), animated: true)
         case 1:
             print("앨범 클릭")
+            self.navigationController?.pushViewController(PhotoSelectViewController(), animated: true)
         case 2:
             print("번역 기록 클릭")
         default: // nothing
