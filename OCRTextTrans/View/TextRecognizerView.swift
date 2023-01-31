@@ -105,7 +105,7 @@ extension TextRecognizerView {
     }
 }
 
-// MARK: - action method, 수정 예정
+// MARK: - action method
 extension TextRecognizerView {
     @objc func clickTransButton(_ sender: Any) { // 번역 버튼 클릭 -> 화면 전환
         let capturetransVC = CaptureImageTransView(
@@ -117,7 +117,7 @@ extension TextRecognizerView {
 
 // MARK: - Constants
 private enum Constants {
-    static let imageViewHeight: CGFloat = UIScreen.main.bounds.height * 0.75
+    static let imageViewHeight: CGFloat = ScreenInfo.screenHeight * 0.75
     static let buttonColor: UIColor = .lightGray
     static let screenTitle: String = "텍스트 인식"
 }

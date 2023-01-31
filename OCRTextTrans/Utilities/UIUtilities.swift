@@ -107,3 +107,9 @@ extension UIImage {
   }
 }
 
+// MARK: - Screen Infomation => 윈도우에 관한 정보를 가지는 구조체
+public struct ScreenInfo {
+    static let screenWidth: CGFloat = UIScreen.main.bounds.width // screen width
+    static let screenHeight: CGFloat = UIScreen.main.bounds.height // screen height
+}
+

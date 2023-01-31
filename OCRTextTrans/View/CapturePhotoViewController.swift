@@ -54,7 +54,7 @@ class CapturePhotoViewController: UIViewController {
     }()
     private lazy var reCaptureBtn: UIButton = { // 다시 찍기 버튼
         let button = UIButton()
-        button.setTitle("다시 찍기", for: .normal)
+        button.setTitle("다시 선택", for: .normal)
         return button
     }()
     private lazy var ocrBtn: UIButton = { // 번역 버튼
@@ -94,7 +94,6 @@ class CapturePhotoViewController: UIViewController {
         self.reCaptureBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
         self.cropBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
         self.ocrBtn.addTarget(self, action: #selector(bottomBtnClick(_:)), for: .touchUpInside)
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -102,7 +101,7 @@ class CapturePhotoViewController: UIViewController {
         super.viewDidLayoutSubviews()
         topContainerView.snp.makeConstraints { make in
             make.leading.trailing.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.height.equalTo(Constants.screenHeight/15)
+            make.height.equalTo(ScreenInfo.screenHeight/15)
             make.bottom.equalTo(self.captureIV.snp.top)
         }
         recognizeLanguageButton.snp.makeConstraints { make in
@@ -121,7 +120,7 @@ class CapturePhotoViewController: UIViewController {
         bottomContainerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.snp.bottom)
-            make.height.equalTo(Constants.screenHeight/11)
+            make.height.equalTo(ScreenInfo.screenHeight/11)
         }
     }
     private func createLanguageAlert() { // 인식 언어를 선택하지 않은 경우 언어 선택 alert생성
@@ -136,7 +135,7 @@ extension CapturePhotoViewController {
     // 화면 상단의 액션 메소드
     @objc func topBtnclick(_ sender: UIButton) { // 피커뷰 위치 선택한 위치로 옮기기
         let languageVC = LanguagePickerViewController() // 언어선택 피커뷰 생성
-        languageVC.preferredContentSize = CGSize(width: Constants.screenWidth, height: Constants.screenHeight/3)
+        languageVC.preferredContentSize = CGSize(width: ScreenInfo.screenWidth, height: ScreenInfo.screenHeight/3)
         
         let alert = UIAlertController(title: "언어 선택", message: "", preferredStyle: .actionSheet) // 피커뷰를 담을 alert 컨트롤러 생성
         alert.setValue(languageVC, forKey: "contentViewController")
@@ -163,7 +162,7 @@ extension CapturePhotoViewController {
                 return
             }
             let textRecognizerVC = TextRecognizerView(image: self.captureIV.image!, recLanguage: self.recognizeLanguageButton.title(for: .normal)!)
-            self.navigationController?.pushViewController(textRecognizerVC, animated: true)
+            self.navigationController?.pushViewController(textRecognizerVC, animated: false)
         default:
             fatalError()
         }
@@ -188,40 +187,10 @@ extension CapturePhotoViewController: CropViewControllerDelegate {
 
 // MARK: - Constants
 private enum Constants {
-    static let screenWidth: CGFloat = UIScreen.main.bounds.width - 20 // screen width
-    static let screenHeight: CGFloat = UIScreen.main.bounds.height // screen height
     static let screenTitle: String = "사진"
     static let languageButtonTitle: String = "언어 선택"
     static let selectLanguageMsg: String = "인식할 언어를 선택해 주세요."
+    static let userDefaultsKey: String = "recLanguage" // 인식할 언어를 선택하는 버튼의 타이틀을 가져오는 키
     static let containerColor: UIColor = .lightGray
     static let barTintColor: UIColor = .white
 }
-
-// MARK: - Swift UI preview
-#if DEBUG
-import SwiftUI
-
-struct CaptureViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        
-    }
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> UIViewController {
-        CapturePhotoViewController(image: UIImage(named: "ocr2.HEIC") ?? UIImage())
-        
-    }
-    @available(iOS 13.0, *)
-    struct ViewController_Previews: PreviewProvider {
-        static var previews: some View {
-            if #available(iOS 15.0, *) {
-                CaptureViewControllerRepresentable()
-                    .previewInterfaceOrientation(.portrait)
-            } else {
-                // Fallback on earlier versions
-            }
-        }
-    }
-}
-
-#endif

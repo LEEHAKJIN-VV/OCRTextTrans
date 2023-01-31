@@ -19,7 +19,6 @@ class CaptureImageTransView: UIViewController {
     
     var translatedText: String = "" // 번역된 텍스트
     var disposalbleBag = Set<AnyCancellable>()
-    
     // MARK: - view object
     private lazy var containerView: UIView = { // 번역 화면의 컨테이너 뷰
         let view = UIView()
@@ -153,7 +152,6 @@ class CaptureImageTransView: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.recognitionLanguage = recLanguage // 이미지에서 텍스트를 탐지한 언어
         self.detectText = detectText
-        //self.viewModel = CaptureImageTransViewModel(text: detectText, sourceLan: recLanguage, targetLan: "한국어") // 기본은 한국어
         print("recLanguage: \(recLanguage)")
         self.setBinding() // 바인딩 연결
     }
@@ -270,7 +268,7 @@ extension CaptureImageTransView {
         self.bottomContainerView.addSubview(activityIndicator) // 하단 컨테이너 뷰의 subview로 등록
         self.activityIndicator.snp.makeConstraints { make in // 제약 조건
             make.center.equalToSuperview()
-            make.width.height.equalTo(Constants.screenWidth/5)
+            make.width.height.equalTo(ScreenInfo.screenWidth/5)
         }
         self.activityIndicator.startAnimating() // 애니메이션 시작
     }
@@ -283,8 +281,8 @@ extension CaptureImageTransView {
 extension CaptureImageTransView {
     @objc func clickLanBtn(_ sender: UIButton) { // 언어를 선택하는 버튼
         let languageVC = LanguagePickerViewController() // 언어선택 피커뷰 생성
-        languageVC.preferredContentSize = CGSize(width: Constants.screenWidth, height: Constants.screenHeight / 3) // 피커뷰를 alert에 삽입
-        
+        languageVC.preferredContentSize = CGSize(width: ScreenInfo.screenWidth, height: ScreenInfo.screenHeight/3)
+
         let alert = UIAlertController(title: "언어 선택", message: "", preferredStyle: .actionSheet) // 피커뷰를 담을 alert 컨트롤러 생성
         alert.setValue(languageVC, forKey: "contentViewController")
         alert.addAction(UIAlertAction(title: "취소", style: .cancel) { (_) in }) // 취소 버튼
@@ -308,10 +306,16 @@ extension CaptureImageTransView {
             fatalError()
         }
     }
+      
+    @objc func onClickSwitchButton(_ sender: Any) {
+        let tmpLanguage = self.recognizeLanguageButton.title(for: .normal)
+        self.recognizeLanguageButton.setTitle(self.translateLanguageButton.title(for: .normal)!, for: .normal)
+        self.translateLanguageButton.setTitle(tmpLanguage, for: .normal)
+    }
+    
     @objc func onClickTranslateButton(_ sender: Any) { // 번역하기 버튼
         let soureLanguage: String = self.recognizeLanguageButton.title(for: .normal)! // 번역하기 전 언어
         let targetLanguage: String = self.translateLanguageButton.title(for: .normal)! // 번역한 후 언어
-        
         self.startLoadingAnimation() // 로딩 애니메이션 시작
         self.viewModel.handleDownloadDeleteModel(text:self.originTextView.text, sourceLan: soureLanguage, targetLan: targetLanguage) // 번역하기 버튼 클릭 -> 뷰 바인딩을 통한
     }
@@ -338,7 +342,6 @@ extension CaptureImageTransView {
         toastLabel.clipsToBounds = true
         
         self.originOptionStackview.addSubview(toastLabel)
-        
         toastLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
@@ -353,10 +356,8 @@ extension CaptureImageTransView {
 
 // MARK: - Constants
 private enum Constants {
-    static let screenHeight: CGFloat = UIScreen.main.bounds.height
-    static let screenWidth: CGFloat = UIScreen.main.bounds.width
-    static let textStackViewHeight: CGFloat = UIScreen.main.bounds.height * 0.8
-    static let contaierViewHeight: CGFloat = UIScreen.main.bounds.height * 0.4
+    static let textStackViewHeight: CGFloat = ScreenInfo.screenHeight * 0.8
+    static let contaierViewHeight: CGFloat = ScreenInfo.screenHeight * 0.4
     static let initTransLanguage: String = "한국어"
     static let screenTitle: String = "번역 결과"
     static let copyMsg: String = "텍스트가 복사 되었습니다."
@@ -364,33 +365,3 @@ private enum Constants {
     static let toastBackgroundColor: UIColor = .black
     static let toastTextColor: UIColor = .white
 }
-
-
-// MARK: - Swift UI preview
-//#if DEBUG
-//import SwiftUI
-//
-//struct CaptureImageTransViewRepresentable: UIViewControllerRepresentable {
-//    // update
-//    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//
-//    }
-//    @available(iOS 13.0, *)
-//    func makeUIViewController(context: Context) -> UIViewController {
-//        CaptureImageTransView()
-//
-//    }
-//    @available(iOS 13.0, *)
-//    struct ViewController_Previews: PreviewProvider {
-//        static var previews: some View {
-//            if #available(iOS 15.0, *) {
-//                CaptureImageTransViewRepresentable()
-//                    .previewInterfaceOrientation(.portrait)
-//            } else {
-//                // Fallback on earlier versions
-//            }
-//        }
-//    }
-//}
-
-//#endif

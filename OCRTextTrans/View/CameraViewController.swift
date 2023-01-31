@@ -187,7 +187,7 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
         
         self.captureViewController = CapturePhotoViewController(image: image)
         captureViewController?.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(captureViewController!, animated: true)
+        self.navigationController?.pushViewController(captureViewController!, animated: false)
     }
 }
 
@@ -198,32 +198,3 @@ private enum Constants {
     static let alertContent = "카메라 사용을 원하시는 경우, 설정에서 카메라의 권한을 승인해주세요."
     static let bartintColor: UIColor = .white
 }
-
-// MARK: - Swift UI preview
-#if DEBUG
-import SwiftUI
-
-struct CameraViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        
-    }
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> UIViewController {
-        CameraViewController()
-        
-    }
-    @available(iOS 13.0, *)
-    struct ViewController_Previews: PreviewProvider {
-        static var previews: some View {
-            if #available(iOS 15.0, *) {
-                CameraViewControllerRepresentable()
-                    .previewInterfaceOrientation(.portrait)
-            } else {
-                // Fallback on earlier versions
-            }
-        }
-    }
-}
-
-#endif

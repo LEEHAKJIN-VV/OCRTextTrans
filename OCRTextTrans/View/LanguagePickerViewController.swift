@@ -12,8 +12,6 @@ import Combine
 
 // MARK: - LanguagePickerViewController
 class LanguagePickerViewController: UIViewController {
-    private let screenWidth = UIScreen.main.bounds.width - 20
-    private let screenHeight = UIScreen.main.bounds.height / 3
     var currentLanguage: String = "한국어"
     
     var languageViewModel = SupportLanguageViewModel() // 지원하는 언어 뷰 모델
@@ -22,17 +20,17 @@ class LanguagePickerViewController: UIViewController {
     
     private lazy var pickerView: UIPickerView = {
         let pv = UIPickerView()
-        pv.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+        pv.frame = CGRect(x: 0, y: 0, width: ScreenInfo.screenHeight, height: ScreenInfo.screenHeight)
         pv.dataSource = self
         pv.delegate = self
         return pv
     }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(pickerView)
         self.setBingds() // binding
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.pickerView.snp.makeConstraints { make in // 제약 설정
@@ -55,7 +53,6 @@ extension LanguagePickerViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return self.languageList.count
     }
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int { // component의 수를 반환
         return 1
     }
