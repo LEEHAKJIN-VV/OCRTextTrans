@@ -7,23 +7,59 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2813AC8128A4F11500F646B6 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2813AC8028A4F11500F646B6 /* CameraViewController.swift */; };
+		2813AC8628A5317000F646B6 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 2813AC8528A5317000F646B6 /* CropViewController */; };
+		2813AC8828A5317000F646B6 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 2813AC8728A5317000F646B6 /* TOCropViewController */; };
+		2813AC8C28A54D2600F646B6 /* CapturePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2813AC8B28A54D2600F646B6 /* CapturePhotoViewController.swift */; };
+		28352D5C28C0553A00174611 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 28352D5B28C0553A00174611 /* NVActivityIndicatorView */; };
+		2850EAD228AFC003007200DB /* SupportLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850EAD128AFC003007200DB /* SupportLanguageViewModel.swift */; };
+		2850EAD428AFD162007200DB /* TextRecognizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850EAD328AFD162007200DB /* TextRecognizerViewModel.swift */; };
+		2850EAD728AFD930007200DB /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2850EAD628AFD930007200DB /* LanguageModel.swift */; };
+		286C520528A2347300212EA4 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C520428A2347300212EA4 /* MainNavigationController.swift */; };
+		286C520828A2488700212EA4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 286C520728A2488700212EA4 /* SnapKit */; };
+		2887004C28C4A4C400DB9749 /* PhotoSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2887004B28C4A4C400DB9749 /* PhotoSelectViewController.swift */; };
+		28A87FAB28B3C70C00B054B3 /* LanguageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A87FAA28B3C70C00B054B3 /* LanguageType.swift */; };
+		28BE51E028B4A416001C5AE4 /* TextRecognizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BE51DF28B4A416001C5AE4 /* TextRecognizerView.swift */; };
+		28C3202728B663030053E7F5 /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C3202628B663030053E7F5 /* UIUtilities.swift */; };
+		28CE231328A7DF5F009FF8AD /* CaptureImageTransView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE231228A7DF5F009FF8AD /* CaptureImageTransView.swift */; };
+		28CE619A28A37AA70038010A /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286C520228A2092400212EA4 /* MainPage.swift */; };
+		28CE619E28A3DFE30038010A /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE619D28A3DFE30038010A /* PermissionManager.swift */; };
+		28DDF9CF28AA7D50008A7A2D /* LanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DDF9CE28AA7D50008A7A2D /* LanguagePickerViewController.swift */; };
 		28F279E2289E5AF300D984A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F279E1289E5AF300D984A5 /* AppDelegate.swift */; };
 		28F279E4289E5AF300D984A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F279E3289E5AF300D984A5 /* SceneDelegate.swift */; };
-		28F279E6289E5AF300D984A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F279E5289E5AF300D984A5 /* ViewController.swift */; };
 		28F279E9289E5AF300D984A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F279E7289E5AF300D984A5 /* Main.storyboard */; };
 		28F279EB289E5AF400D984A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F279EA289E5AF400D984A5 /* Assets.xcassets */; };
 		28F279EE289E5AF400D984A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F279EC289E5AF400D984A5 /* LaunchScreen.storyboard */; };
+		28F8B94228BDF93300300802 /* CaptureImageTransViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F8B94128BDF93300300802 /* CaptureImageTransViewModel.swift */; };
+		61244294B74C46C75C211D06 /* Pods_OCRTextTrans.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A801DB5ED0A5C930DA2D0D /* Pods_OCRTextTrans.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0CD8137D2A8BC63EAEEBA432 /* Pods-OCRTextTrans.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCRTextTrans.debug.xcconfig"; path = "Target Support Files/Pods-OCRTextTrans/Pods-OCRTextTrans.debug.xcconfig"; sourceTree = "<group>"; };
+		2813AC8028A4F11500F646B6 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		2813AC8B28A54D2600F646B6 /* CapturePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturePhotoViewController.swift; sourceTree = "<group>"; };
+		2850EAD128AFC003007200DB /* SupportLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportLanguageViewModel.swift; sourceTree = "<group>"; };
+		2850EAD328AFD162007200DB /* TextRecognizerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognizerViewModel.swift; sourceTree = "<group>"; };
+		2850EAD628AFD930007200DB /* LanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
+		286C520228A2092400212EA4 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
+		286C520428A2347300212EA4 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		2887004B28C4A4C400DB9749 /* PhotoSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectViewController.swift; sourceTree = "<group>"; };
+		28A87FAA28B3C70C00B054B3 /* LanguageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageType.swift; sourceTree = "<group>"; };
+		28BE51DF28B4A416001C5AE4 /* TextRecognizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognizerView.swift; sourceTree = "<group>"; };
+		28C3202628B663030053E7F5 /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
+		28CE231228A7DF5F009FF8AD /* CaptureImageTransView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureImageTransView.swift; sourceTree = "<group>"; };
+		28CE619D28A3DFE30038010A /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
+		28DDF9CE28AA7D50008A7A2D /* LanguagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerViewController.swift; sourceTree = "<group>"; };
 		28F279DE289E5AF300D984A5 /* OCRTextTrans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCRTextTrans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F279E1289E5AF300D984A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28F279E3289E5AF300D984A5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		28F279E5289E5AF300D984A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		28F279E8289E5AF300D984A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		28F279EA289E5AF400D984A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28F279ED289E5AF400D984A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28F279EF289E5AF400D984A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28F8B94128BDF93300300802 /* CaptureImageTransViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureImageTransViewModel.swift; sourceTree = "<group>"; };
+		34A801DB5ED0A5C930DA2D0D /* Pods_OCRTextTrans.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OCRTextTrans.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7D60A967804DE05B602C3DB /* Pods-OCRTextTrans.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCRTextTrans.release.xcconfig"; path = "Target Support Files/Pods-OCRTextTrans/Pods-OCRTextTrans.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +67,74 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				286C520828A2488700212EA4 /* SnapKit in Frameworks */,
+				28352D5C28C0553A00174611 /* NVActivityIndicatorView in Frameworks */,
+				2813AC8828A5317000F646B6 /* TOCropViewController in Frameworks */,
+				2813AC8628A5317000F646B6 /* CropViewController in Frameworks */,
+				61244294B74C46C75C211D06 /* Pods_OCRTextTrans.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2850EAD528AFD650007200DB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2850EAD628AFD930007200DB /* LanguageModel.swift */,
+				28A87FAA28B3C70C00B054B3 /* LanguageType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		286C51FF28A204FF00212EA4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				286C520228A2092400212EA4 /* MainPage.swift */,
+				286C520428A2347300212EA4 /* MainNavigationController.swift */,
+				2813AC8028A4F11500F646B6 /* CameraViewController.swift */,
+				2813AC8B28A54D2600F646B6 /* CapturePhotoViewController.swift */,
+				28CE231228A7DF5F009FF8AD /* CaptureImageTransView.swift */,
+				28DDF9CE28AA7D50008A7A2D /* LanguagePickerViewController.swift */,
+				28BE51DF28B4A416001C5AE4 /* TextRecognizerView.swift */,
+				2887004B28C4A4C400DB9749 /* PhotoSelectViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2887004D28C4E14100DB9749 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				28C3202628B663030053E7F5 /* UIUtilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		28CE619F28A3E16A0038010A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2850EAD128AFC003007200DB /* SupportLanguageViewModel.swift */,
+				2850EAD328AFD162007200DB /* TextRecognizerViewModel.swift */,
+				28F8B94128BDF93300300802 /* CaptureImageTransViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		28CE61A228A3EC7A0038010A /* Permission */ = {
+			isa = PBXGroup;
+			children = (
+				28CE619D28A3DFE30038010A /* PermissionManager.swift */,
+			);
+			path = Permission;
+			sourceTree = "<group>";
+		};
 		28F279D5289E5AF300D984A5 = {
 			isa = PBXGroup;
 			children = (
 				28F279E0289E5AF300D984A5 /* OCRTextTrans */,
 				28F279DF289E5AF300D984A5 /* Products */,
+				DDE465E5FAE1D16C9656313A /* Pods */,
+				2E5ADC49FC81977E0E965E73 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +149,36 @@
 		28F279E0289E5AF300D984A5 /* OCRTextTrans */ = {
 			isa = PBXGroup;
 			children = (
+				2887004D28C4E14100DB9749 /* Utilities */,
+				2850EAD528AFD650007200DB /* Model */,
+				28CE61A228A3EC7A0038010A /* Permission */,
+				28CE619F28A3E16A0038010A /* ViewModel */,
+				286C51FF28A204FF00212EA4 /* View */,
 				28F279E1289E5AF300D984A5 /* AppDelegate.swift */,
 				28F279E3289E5AF300D984A5 /* SceneDelegate.swift */,
-				28F279E5289E5AF300D984A5 /* ViewController.swift */,
 				28F279E7289E5AF300D984A5 /* Main.storyboard */,
 				28F279EA289E5AF400D984A5 /* Assets.xcassets */,
 				28F279EC289E5AF400D984A5 /* LaunchScreen.storyboard */,
 				28F279EF289E5AF400D984A5 /* Info.plist */,
 			);
 			path = OCRTextTrans;
+			sourceTree = "<group>";
+		};
+		2E5ADC49FC81977E0E965E73 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34A801DB5ED0A5C930DA2D0D /* Pods_OCRTextTrans.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DDE465E5FAE1D16C9656313A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0CD8137D2A8BC63EAEEBA432 /* Pods-OCRTextTrans.debug.xcconfig */,
+				A7D60A967804DE05B602C3DB /* Pods-OCRTextTrans.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,15 +188,24 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28F279F2289E5AF400D984A5 /* Build configuration list for PBXNativeTarget "OCRTextTrans" */;
 			buildPhases = (
+				5E6D563200855F7CF7137B38 /* [CP] Check Pods Manifest.lock */,
 				28F279DA289E5AF300D984A5 /* Sources */,
 				28F279DB289E5AF300D984A5 /* Frameworks */,
 				28F279DC289E5AF300D984A5 /* Resources */,
+				E77A4A0B9373CAC15C5E806E /* [CP] Embed Pods Frameworks */,
+				1B02061D15ADE518DC3E8B95 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = OCRTextTrans;
+			packageProductDependencies = (
+				286C520728A2488700212EA4 /* SnapKit */,
+				2813AC8528A5317000F646B6 /* CropViewController */,
+				2813AC8728A5317000F646B6 /* TOCropViewController */,
+				28352D5B28C0553A00174611 /* NVActivityIndicatorView */,
+			);
 			productName = OCRTextTrans;
 			productReference = 28F279DE289E5AF300D984A5 /* OCRTextTrans.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +234,11 @@
 				Base,
 			);
 			mainGroup = 28F279D5289E5AF300D984A5;
+			packageReferences = (
+				286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
+				28352D5A28C0553A00174611 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
+			);
 			productRefGroup = 28F279DF289E5AF300D984A5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -133,14 +261,87 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1B02061D15ADE518DC3E8B95 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OCRTextTrans/Pods-OCRTextTrans-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OCRTextTrans/Pods-OCRTextTrans-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OCRTextTrans/Pods-OCRTextTrans-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E6D563200855F7CF7137B38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OCRTextTrans-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E77A4A0B9373CAC15C5E806E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OCRTextTrans/Pods-OCRTextTrans-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OCRTextTrans/Pods-OCRTextTrans-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OCRTextTrans/Pods-OCRTextTrans-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		28F279DA289E5AF300D984A5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28F279E6289E5AF300D984A5 /* ViewController.swift in Sources */,
+				28CE231328A7DF5F009FF8AD /* CaptureImageTransView.swift in Sources */,
+				286C520528A2347300212EA4 /* MainNavigationController.swift in Sources */,
+				28F8B94228BDF93300300802 /* CaptureImageTransViewModel.swift in Sources */,
+				28A87FAB28B3C70C00B054B3 /* LanguageType.swift in Sources */,
+				2887004C28C4A4C400DB9749 /* PhotoSelectViewController.swift in Sources */,
+				2850EAD728AFD930007200DB /* LanguageModel.swift in Sources */,
+				2850EAD228AFC003007200DB /* SupportLanguageViewModel.swift in Sources */,
 				28F279E2289E5AF300D984A5 /* AppDelegate.swift in Sources */,
+				28DDF9CF28AA7D50008A7A2D /* LanguagePickerViewController.swift in Sources */,
+				28CE619E28A3DFE30038010A /* PermissionManager.swift in Sources */,
+				2813AC8C28A54D2600F646B6 /* CapturePhotoViewController.swift in Sources */,
+				2850EAD428AFD162007200DB /* TextRecognizerViewModel.swift in Sources */,
+				28BE51E028B4A416001C5AE4 /* TextRecognizerView.swift in Sources */,
 				28F279E4289E5AF300D984A5 /* SceneDelegate.swift in Sources */,
+				28CE619A28A37AA70038010A /* MainPage.swift in Sources */,
+				28C3202728B663030053E7F5 /* UIUtilities.swift in Sources */,
+				2813AC8128A4F11500F646B6 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +417,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -282,6 +483,7 @@
 		};
 		28F279F3289E5AF400D984A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CD8137D2A8BC63EAEEBA432 /* Pods-OCRTextTrans.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -290,11 +492,13 @@
 				DEVELOPMENT_TEAM = 856Q6QA7Z9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OCRTextTrans/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "텍스트인식";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,12 +508,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		28F279F4289E5AF400D984A5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7D60A967804DE05B602C3DB /* Pods-OCRTextTrans.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -318,11 +523,13 @@
 				DEVELOPMENT_TEAM = 856Q6QA7Z9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OCRTextTrans/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "텍스트인식";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,7 +539,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -358,6 +565,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TimOliver/TOCropViewController.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		28352D5A28C0553A00174611 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2813AC8528A5317000F646B6 /* CropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = CropViewController;
+		};
+		2813AC8728A5317000F646B6 /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2813AC8428A5317000F646B6 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
+		};
+		28352D5B28C0553A00174611 /* NVActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28352D5A28C0553A00174611 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorView;
+		};
+		286C520728A2488700212EA4 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 286C520628A2488700212EA4 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 28F279D6289E5AF300D984A5 /* Project object */;
 }
