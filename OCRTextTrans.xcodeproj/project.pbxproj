@@ -27,7 +27,6 @@
 		28DDF9CF28AA7D50008A7A2D /* LanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DDF9CE28AA7D50008A7A2D /* LanguagePickerViewController.swift */; };
 		28F279E2289E5AF300D984A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F279E1289E5AF300D984A5 /* AppDelegate.swift */; };
 		28F279E4289E5AF300D984A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F279E3289E5AF300D984A5 /* SceneDelegate.swift */; };
-		28F279E6289E5AF300D984A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F279E5289E5AF300D984A5 /* ViewController.swift */; };
 		28F279E9289E5AF300D984A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F279E7289E5AF300D984A5 /* Main.storyboard */; };
 		28F279EB289E5AF400D984A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F279EA289E5AF400D984A5 /* Assets.xcassets */; };
 		28F279EE289E5AF400D984A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F279EC289E5AF400D984A5 /* LaunchScreen.storyboard */; };
@@ -54,7 +53,6 @@
 		28F279DE289E5AF300D984A5 /* OCRTextTrans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCRTextTrans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F279E1289E5AF300D984A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28F279E3289E5AF300D984A5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		28F279E5289E5AF300D984A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		28F279E8289E5AF300D984A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		28F279EA289E5AF400D984A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28F279ED289E5AF400D984A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -104,6 +102,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		2887004D28C4E14100DB9749 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				28C3202628B663030053E7F5 /* UIUtilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		28CE619F28A3E16A0038010A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,18 +149,17 @@
 		28F279E0289E5AF300D984A5 /* OCRTextTrans */ = {
 			isa = PBXGroup;
 			children = (
+				2887004D28C4E14100DB9749 /* Utilities */,
 				2850EAD528AFD650007200DB /* Model */,
 				28CE61A228A3EC7A0038010A /* Permission */,
 				28CE619F28A3E16A0038010A /* ViewModel */,
 				286C51FF28A204FF00212EA4 /* View */,
 				28F279E1289E5AF300D984A5 /* AppDelegate.swift */,
 				28F279E3289E5AF300D984A5 /* SceneDelegate.swift */,
-				28F279E5289E5AF300D984A5 /* ViewController.swift */,
 				28F279E7289E5AF300D984A5 /* Main.storyboard */,
 				28F279EA289E5AF400D984A5 /* Assets.xcassets */,
 				28F279EC289E5AF400D984A5 /* LaunchScreen.storyboard */,
 				28F279EF289E5AF400D984A5 /* Info.plist */,
-				28C3202628B663030053E7F5 /* UIUtilities.swift */,
 			);
 			path = OCRTextTrans;
 			sourceTree = "<group>";
@@ -324,7 +329,6 @@
 				286C520528A2347300212EA4 /* MainNavigationController.swift in Sources */,
 				28F8B94228BDF93300300802 /* CaptureImageTransViewModel.swift in Sources */,
 				28A87FAB28B3C70C00B054B3 /* LanguageType.swift in Sources */,
-				28F279E6289E5AF300D984A5 /* ViewController.swift in Sources */,
 				2887004C28C4A4C400DB9749 /* PhotoSelectViewController.swift in Sources */,
 				2850EAD728AFD930007200DB /* LanguageModel.swift in Sources */,
 				2850EAD228AFC003007200DB /* SupportLanguageViewModel.swift in Sources */,

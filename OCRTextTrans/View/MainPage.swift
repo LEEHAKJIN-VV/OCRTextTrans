@@ -11,7 +11,7 @@ import SnapKit
 
 // MARK: - Category 종류
 enum CategoryKind: Int{
-    case camera, album, record
+    case camera, album //record
 }
 
 // MARK: - MainPage
@@ -46,7 +46,7 @@ final class MainPage: UIViewController {
         }
         self.categoryStackView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(self.containerView).inset(100)
-            make.bottom.top.equalTo(self.containerView).inset(100)
+            make.bottom.top.equalTo(self.containerView).inset(150)
         }
         self.categoryStackView.spacing = 32 // spacing은 스택뷰의 서브 뷰들이 배치되고 나서 호출
     }
@@ -64,7 +64,7 @@ final class MainPage: UIViewController {
     private func setCategory() { // set category
         self.createCategoryImage(mode: CategoryKind.camera)
         self.createCategoryImage(mode: CategoryKind.album)
-        self.createCategoryImage(mode: CategoryKind.record)
+        //self.createCategoryImage(mode: CategoryKind.record)
     }
     // Create select image location: 1. camera, 2. album 3. history
     private func createCategoryImage(mode: CategoryKind) {
@@ -82,8 +82,8 @@ final class MainPage: UIViewController {
             categoryButton.setImage(UIImage(systemName: Constants.cameraIconName), for: .normal)
         case .album:
             categoryButton.setImage(UIImage(systemName: Constants.albumIconName), for: .normal)
-        case .record:
-            categoryButton.setImage(UIImage(systemName: Constants.recordIconName), for: .normal)
+//        case .record:
+//            categoryButton.setImage(UIImage(systemName: Constants.recordIconName), for: .normal)
         }
     }
 }
@@ -97,8 +97,8 @@ extension MainPage {
         case 1:
             print("앨범 클릭")
             self.navigationController?.pushViewController(PhotoSelectViewController(), animated: true)
-        case 2:
-            print("번역 기록 클릭")
+//        case 2:
+//            print("번역 기록 클릭")
         default: // nothing
             break
         }
@@ -116,32 +116,3 @@ private enum Constants {
     static let iconColor: UIColor = .white
     static let bartintColor: UIColor = .white
 }
-
-// MARK: - Swift UI preview
-#if DEBUG
-import SwiftUI
-
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        
-    }
-    @available(iOS 13.0, *)
-    func makeUIViewController(context: Context) -> UIViewController {
-            MainNavgationController()
-        
-    }
-    @available(iOS 13.0, *)
-    struct ViewController_Previews: PreviewProvider {
-        static var previews: some View {
-            if #available(iOS 15.0, *) {
-                ViewControllerRepresentable()
-                    .previewInterfaceOrientation(.portrait)
-            } else {
-                // Fallback on earlier versions
-            }
-        }
-    }
-}
-
-#endif

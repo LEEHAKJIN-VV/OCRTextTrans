@@ -10,7 +10,8 @@ import UIKit
 import SnapKit
 import PhotosUI
 
-// 앨범에서 이미지를 가져오는 뷰 컨트롤러
+// MARK: - 앨범에서 이미지를 가져오는 뷰 컨트롤러
+/// phppickerviewcontroller는 단순히 읽기만 하는 경우 권한 요청이 필요 없음
 class PhotoSelectViewController: UIViewController {
     private var selectedAssetIdentifiers = [String]()
     
@@ -58,11 +59,11 @@ class PhotoSelectViewController: UIViewController {
         }
         self.bottomContainerView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(Constants.screenHeight/10)
+            make.height.equalTo(ScreenInfo.screenHeight/11)
         }
         self.selectButton.snp.makeConstraints { make in
             make.height.equalToSuperview()
-            make.width.equalTo(Constants.screenWidth / 2)
+            make.width.equalTo(ScreenInfo.screenWidth / 2)
             make.center.equalToSuperview()
         }
     }
@@ -73,7 +74,6 @@ class PhotoSelectViewController: UIViewController {
         let barItem = UIBarButtonItem(title: "다음", style: .plain, target: self, action: #selector(onClickNextScreen(_:))) // 네비게이션바 오른쪽 버튼 생성
         self.navigationItem.rightBarButtonItem = barItem
     }
-    
     private func presentPicker(filter: PHPickerFilter?) { // phppicker controller 생성
         var configuration = PHPickerConfiguration(photoLibrary: .shared())
         configuration.filter = filter
@@ -85,6 +85,14 @@ class PhotoSelectViewController: UIViewController {
         picker.delegate = self
         self.present(picker, animated: true)
     }
+    private func showAlert() { // 이미지를 선택하라는 aler 생성
+        let alert = UIAlertController(
+            title: Constants.alertTitle,
+            message: Constants.alertMsg,
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+        self.present(alert, animated: false)
+    }
 }
 
 // MARK: - action method
@@ -93,10 +101,13 @@ extension PhotoSelectViewController {
         self.presentPicker(filter: .images)
     }
     @objc func onClickNextScreen(_ sender: Any) { // 다음 화면 버튼
-        guard let photoImg = self.albumImageView.image else { return }
+        guard let photoImg = self.albumImageView.image else { // 이미지가 선택되지 않은 경우 alert 보여줌
+            self.showAlert()
+            return
+        }
         let captureViewController = CapturePhotoViewController(image: photoImg)
         captureViewController.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(captureViewController, animated: true)
+        self.navigationController?.pushViewController(captureViewController, animated: false)
     }
 }
 
@@ -120,9 +131,9 @@ extension PhotoSelectViewController: PHPickerViewControllerDelegate {
 
 // MARK: - Constants
 private enum Constants {
-    static let screenWidth: CGFloat = UIScreen.main.bounds.width - 20 // screen width
-    static let screenHeight: CGFloat = UIScreen.main.bounds.height // screen height
     static let screenTitle: String = "이미지 선택"
+    static let alertTitle: String = "알림"
+    static let alertMsg: String = "이미지를 선택해 주세요."
     
     static let backgroundColor: UIColor = .lightGray
     static let bartintColor: UIColor = .white
