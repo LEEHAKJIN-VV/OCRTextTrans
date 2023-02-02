@@ -58,11 +58,6 @@ class CameraViewController: UIViewController {
         self.startCamera() // 카메라 기능 시작
         self.captureButton.addTarget(self, action: #selector(didTapTakePhoto), for: .touchUpInside) // action method 등록
     }
-    // 뷰가 나타낼때 session 시작
-    override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear call")
-        self.startCaptureSession()
-    }
     
     override func viewDidLayoutSubviews() {
         print("viewDidLayoutSubviews call")
