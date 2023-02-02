@@ -32,5 +32,12 @@
 
 
 
-## 스크린샷
+## 앱 시연 영상
+
+### 카메라 
+![카메라데모-min](https://user-images.githubusercontent.com/52197436/216287417-33477e4b-5b0c-4c1d-aef3-65d61317eec5.gif)
+
+### 앨범
+![앨범데모-min](https://user-images.githubusercontent.com/52197436/216288481-2f788048-ca33-44b0-b66e-8c2488ac17c7.gif)
+
 
